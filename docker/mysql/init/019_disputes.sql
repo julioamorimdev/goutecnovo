@@ -1,0 +1,56 @@
+-- Tabela para disputas
+CREATE TABLE IF NOT EXISTS disputes (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  dispute_number VARCHAR(50) NOT NULL COMMENT 'Número da disputa',
+  client_id BIGINT UNSIGNED NOT NULL COMMENT 'ID do cliente',
+  invoice_id BIGINT UNSIGNED NULL COMMENT 'ID da fatura (se aplicável)',
+  order_id BIGINT UNSIGNED NULL COMMENT 'ID do pedido (se aplicável)',
+  type VARCHAR(50) NOT NULL DEFAULT 'chargeback' COMMENT 'Tipo: chargeback, refund_request, billing_error, service_issue, other',
+  reason VARCHAR(100) NOT NULL COMMENT 'Motivo da disputa',
+  description TEXT NOT NULL COMMENT 'Descrição detalhada da disputa',
+  amount DECIMAL(10,2) NOT NULL DEFAULT 0.00 COMMENT 'Valor disputado',
+  currency VARCHAR(10) NOT NULL DEFAULT 'BRL' COMMENT 'Moeda',
+  status VARCHAR(20) NOT NULL DEFAULT 'open' COMMENT 'Status: open, under_review, resolved, won, lost, withdrawn',
+  priority VARCHAR(20) NOT NULL DEFAULT 'medium' COMMENT 'Prioridade: low, medium, high, urgent',
+  payment_processor VARCHAR(50) NULL COMMENT 'Processador de pagamento (ex: Stripe, PayPal)',
+  transaction_id VARCHAR(255) NULL COMMENT 'ID da transação no processador',
+  chargeback_reason_code VARCHAR(50) NULL COMMENT 'Código do motivo do chargeback',
+  evidence JSON NULL COMMENT 'Evidências/documentos em JSON',
+  resolution_notes TEXT NULL COMMENT 'Notas sobre a resolução',
+  resolved_by BIGINT UNSIGNED NULL COMMENT 'ID do administrador que resolveu',
+  resolved_at TIMESTAMP NULL COMMENT 'Data/hora da resolução',
+  deadline_date DATE NULL COMMENT 'Data limite para resposta',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Data de criação',
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_dispute_number (dispute_number),
+  KEY idx_dispute_client (client_id),
+  KEY idx_dispute_invoice (invoice_id),
+  KEY idx_dispute_order (order_id),
+  KEY idx_dispute_status (status),
+  KEY idx_dispute_type (type),
+  KEY idx_dispute_priority (priority),
+  KEY idx_dispute_deadline (deadline_date),
+  KEY idx_dispute_created (created_at),
+  CONSTRAINT fk_dispute_client FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT fk_dispute_invoice FOREIGN KEY (invoice_id) REFERENCES invoices(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_dispute_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_dispute_admin FOREIGN KEY (resolved_by) REFERENCES admin_users(id) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tabela para histórico/comentários de disputas
+CREATE TABLE IF NOT EXISTS dispute_comments (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  dispute_id BIGINT UNSIGNED NOT NULL COMMENT 'ID da disputa',
+  admin_id BIGINT UNSIGNED NULL COMMENT 'ID do administrador (se comentário interno)',
+  comment TEXT NOT NULL COMMENT 'Comentário',
+  is_internal TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Comentário interno (não visível ao cliente)',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_comment_dispute (dispute_id),
+  KEY idx_comment_admin (admin_id),
+  KEY idx_comment_created (created_at),
+  CONSTRAINT fk_comment_dispute FOREIGN KEY (dispute_id) REFERENCES disputes(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_comment_admin FOREIGN KEY (admin_id) REFERENCES admin_users(id) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+

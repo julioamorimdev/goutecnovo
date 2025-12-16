@@ -1,0 +1,33 @@
+-- Tabela para solicitações de cancelamento
+CREATE TABLE IF NOT EXISTS cancellation_requests (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  client_id BIGINT UNSIGNED NOT NULL COMMENT 'ID do cliente',
+  order_id BIGINT UNSIGNED NULL COMMENT 'ID do pedido (se aplicável)',
+  request_number VARCHAR(50) NOT NULL COMMENT 'Número da solicitação',
+  type VARCHAR(50) NOT NULL DEFAULT 'service' COMMENT 'Tipo: service, order, domain, subscription',
+  reason VARCHAR(100) NOT NULL COMMENT 'Motivo do cancelamento',
+  reason_details TEXT NULL COMMENT 'Detalhes do motivo',
+  requested_date DATE NOT NULL COMMENT 'Data solicitada para cancelamento',
+  effective_date DATE NULL COMMENT 'Data efetiva do cancelamento',
+  status VARCHAR(20) NOT NULL DEFAULT 'pending' COMMENT 'Status: pending, approved, rejected, cancelled, completed',
+  refund_requested TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Solicita reembolso',
+  refund_amount DECIMAL(10,2) NULL COMMENT 'Valor do reembolso (se aplicável)',
+  refund_status VARCHAR(20) NULL COMMENT 'Status do reembolso: pending, approved, paid, rejected',
+  admin_notes TEXT NULL COMMENT 'Notas do administrador',
+  processed_by BIGINT UNSIGNED NULL COMMENT 'ID do administrador que processou',
+  processed_at TIMESTAMP NULL COMMENT 'Data/hora do processamento',
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Data de criação',
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uk_request_number (request_number),
+  KEY idx_request_client (client_id),
+  KEY idx_request_order (order_id),
+  KEY idx_request_status (status),
+  KEY idx_request_type (type),
+  KEY idx_request_date (requested_date),
+  KEY idx_request_created (created_at),
+  CONSTRAINT fk_cancellation_client FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT fk_cancellation_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_cancellation_admin FOREIGN KEY (processed_by) REFERENCES admin_users(id) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
