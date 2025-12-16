@@ -1,0 +1,48 @@
+# Arquivos de ambiente
+.env
+.env.local
+.env.*.local
+
+# Dependências
+/vendor/
+/node_modules/
+
+# Arquivos de log
+*.log
+logs/
+*.log.*
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.phpstorm.meta.php
+
+# Cache
+cache/
+*.cache
+
+# Uploads (se houver)
+uploads/tmp/
+
+# Docker volumes (se necessário)
+docker/mysql/data/
+
+# Arquivos de backup
+*.bak
+*.backup
+*.sql.gz
+
+# Arquivos de configuração local
+config.local.php
+

@@ -1,0 +1,54 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: goutecnovo-web
+    ports:
+      - "8093:80"
+    environment:
+      APP_ENV: local
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: goutecnovo
+      DB_USER: goutecnovo
+      DB_PASS: goutecnovo_pass
+      ADMIN_DEFAULT_USER: admin
+      ADMIN_DEFAULT_PASS: admin123
+    volumes:
+      - ./:/var/www/html:delegated
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.4
+    container_name: goutecnovo-db
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: goutecnovo
+      MYSQL_USER: goutecnovo
+      MYSQL_PASSWORD: goutecnovo_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d:ro
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: goutecnovo-phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 0
+      UPLOAD_LIMIT: 256M
+    ports:
+      - "8094:80"
+    depends_on:
+      - db
+
+volumes:
+  dbdata:
+
+

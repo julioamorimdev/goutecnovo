@@ -1,0 +1,34 @@
+CREATE TABLE IF NOT EXISTS admin_users (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  username VARCHAR(64) NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uniq_admin_username (username)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS menu_items (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  parent_id BIGINT UNSIGNED NULL,
+  label VARCHAR(160) NOT NULL,
+  url VARCHAR(255) NULL,
+  icon_class VARCHAR(120) NULL,
+  description VARCHAR(255) NULL,
+  badge_text VARCHAR(60) NULL,
+  badge_class VARCHAR(120) NULL,
+  dropdown_layout ENUM('default','xl','mega') NOT NULL DEFAULT 'default',
+  custom_html MEDIUMTEXT NULL,
+  is_enabled TINYINT(1) NOT NULL DEFAULT 1,
+  open_new_tab TINYINT(1) NOT NULL DEFAULT 0,
+  sort_order INT NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_menu_parent (parent_id),
+  KEY idx_menu_sort (sort_order),
+  CONSTRAINT fk_menu_parent FOREIGN KEY (parent_id) REFERENCES menu_items(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
