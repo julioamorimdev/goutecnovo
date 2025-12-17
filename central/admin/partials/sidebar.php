@@ -28,7 +28,7 @@ $categories = [
     'conteudo' => [
         'label' => 'Conteúdo do Site',
         'icon' => 'las la-file-alt',
-        'items' => ['menu', 'footer', 'blog', 'feedback', 'announcements', 'downloads']
+        'items' => ['site_layout', 'menu', 'footer', 'blog', 'feedback', 'announcements', 'downloads']
     ],
     'vendas' => [
         'label' => 'Vendas e Comercial',
@@ -93,6 +93,7 @@ function renderCategory($catKey, $category, $isActive, $isCategoryActive, $activ
                 <?php
                 // Mapear itens para URLs e labels
                 $itemMap = [
+                    'site_layout' => ['url' => '/admin/site_layout.php', 'label' => 'Central (menu/footer)', 'icon' => 'las la-object-group'],
                     'menu' => ['url' => '/admin/menu.php', 'label' => 'Menu do site', 'icon' => 'las la-stream'],
                     'footer' => ['url' => '/admin/footer.php', 'label' => 'Footer do site', 'icon' => 'las la-window-minimize'],
                     'blog' => ['url' => '/admin/blog.php', 'label' => 'Blog', 'icon' => 'las la-blog'],

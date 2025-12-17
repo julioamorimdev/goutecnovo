@@ -1,0 +1,181 @@
+<!-- Menu da Central (gerenciável via Admin) -->
+<header class="topbar" role="banner">
+  <div class="container topbar__inner">
+    <a class="brand" href="/" aria-label="GouTec - Central">
+      <img class="brand__logo" src="/admin/assets/img/logo-light.png" alt="GouTec">
+    </a>
+
+    <form class="topbar__search" role="search" action="#" onsubmit="return false;">
+      <i class="las la-search topbar__searchIcon" aria-hidden="true"></i>
+      <input class="topbar__searchInput" type="search" placeholder="Buscar na Central..." aria-label="Buscar na Central">
+    </form>
+
+    <nav class="nav" aria-label="Menu principal">
+      <button class="nav__toggle" type="button" aria-label="Abrir menu" aria-expanded="false" data-nav-toggle>
+        <i class="las la-bars" aria-hidden="true"></i>
+      </button>
+
+      <ul class="nav__list" data-nav-list>
+        <li class="nav__item">
+          <a class="nav__link" href="/client-area" data-nav-link>
+            <i class="las la-user-circle" aria-hidden="true"></i>
+            Área do Cliente
+          </a>
+        </li>
+
+        <li class="nav__item nav__item--dropdown" data-dropdown>
+          <button class="nav__link nav__link--btn" type="button" data-dropdown-toggle aria-expanded="false">
+            Serviços <i class="las la-angle-down" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown" data-dropdown-menu>
+            <a class="dropdown__item" href="/produtos/hospedagem">
+              <i class="las la-server" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Hospedagem</div>
+                <div class="dropdown__desc">Planos rápidos e estáveis</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/produtos/vps">
+              <i class="las la-cloud" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">VPS Cloud</div>
+                <div class="dropdown__desc">Recursos dedicados sob demanda</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/produtos/dominios">
+              <i class="las la-globe" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Domínios</div>
+                <div class="dropdown__desc">Registro, DNS e transferência</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/produtos/ssl">
+              <i class="las la-lock" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">SSL</div>
+                <div class="dropdown__desc">Segurança e confiança</div>
+              </div>
+            </a>
+          </div>
+        </li>
+
+        <li class="nav__item nav__item--dropdown" data-dropdown>
+          <button class="nav__link nav__link--btn" type="button" data-dropdown-toggle aria-expanded="false">
+            Mais <i class="las la-angle-down" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown" data-dropdown-menu>
+            <a class="dropdown__item" href="/anuncios">
+              <i class="las la-bullhorn" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Anúncios</div>
+                <div class="dropdown__desc">Comunicados e novidades</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/status">
+              <i class="las la-network-wired" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Status de Rede</div>
+                <div class="dropdown__desc">Incidentes e manutenção</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/base-conhecimento">
+              <i class="las la-book" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Base de Conhecimento</div>
+                <div class="dropdown__desc">Guias e respostas rápidas</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/downloads">
+              <i class="las la-download" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Downloads</div>
+                <div class="dropdown__desc">Ferramentas e arquivos</div>
+              </div>
+            </a>
+          </div>
+        </li>
+
+        <li class="nav__item nav__item--dropdown" data-dropdown>
+          <button class="nav__link nav__link--btn" type="button" data-dropdown-toggle aria-expanded="false">
+            Conta <i class="las la-angle-down" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown" data-dropdown-menu>
+            <a class="dropdown__item" href="/login">
+              <i class="las la-sign-in-alt" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Entrar</div>
+                <div class="dropdown__desc">Acesse sua conta</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/registrar">
+              <i class="las la-user-plus" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Criar conta</div>
+                <div class="dropdown__desc">Cadastre-se em poucos passos</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/faturas">
+              <i class="las la-file-invoice" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Faturas</div>
+                <div class="dropdown__desc">Pagamentos e histórico</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/meus-tickets">
+              <i class="las la-life-ring" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Meus Tickets</div>
+                <div class="dropdown__desc">Acompanhe seus chamados</div>
+              </div>
+            </a>
+          </div>
+        </li>
+
+        <li class="nav__item nav__item--dropdown nav__item--align-right" data-dropdown>
+          <button class="nav__link nav__link--btn nav__link--support" type="button" data-dropdown-toggle aria-expanded="false">
+            Suporte <i class="las la-angle-down" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown" data-dropdown-menu>
+            <a class="dropdown__item" href="/abrir-ticket">
+              <i class="las la-headset" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Abrir Ticket</div>
+                <div class="dropdown__desc">Fale com a equipe</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/contato">
+              <i class="las la-envelope" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Contato</div>
+                <div class="dropdown__desc">Canais e horários</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/base-conhecimento">
+              <i class="las la-book" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Base de Conhecimento</div>
+                <div class="dropdown__desc">Tutoriais e guias</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/status">
+              <i class="las la-signal" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Status</div>
+                <div class="dropdown__desc">Serviços e incidentes</div>
+              </div>
+            </a>
+          </div>
+        </li>
+
+        <li class="nav__item nav__item--cart">
+          <a class="nav__cart" href="/carrinho" aria-label="Carrinho">
+            <i class="las la-shopping-cart" aria-hidden="true"></i>
+            <span class="nav__cartBadge" aria-label="0 itens">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
