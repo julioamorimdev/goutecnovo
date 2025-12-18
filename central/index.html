@@ -31,6 +31,26 @@
               linear-gradient(180deg, var(--bg0), var(--bg1));
             color: var(--text);
             overflow-x:hidden;
+            position: relative;
+        }
+
+        /* Efeito de neve */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #fff;
+            font-size: 1em;
+            font-family: Arial;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            animation: fall linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
         }
         a{ color:inherit; text-decoration:none; }
         .container{ width:min(1200px, 92vw); margin:0 auto; }
@@ -106,7 +126,7 @@
         }
 
         .dropdown{
-            position:absolute; left:0; top: calc(100% + 10px);
+            position:absolute; left:0; top: 100%;
             width: auto;
             min-width: 260px;
             max-width: min(360px, 92vw);
@@ -433,6 +453,9 @@
     </style>
 </head>
 <body>
+  <!-- Flocos de neve -->
+  <div id="snowflakes"></div>
+
   <div class="app">
     <div id="menu" aria-live="polite"></div>
 
@@ -508,19 +531,19 @@
             </div>
           </div>
           <div class="grid">
-            <a class="card" href="/produtos">
+            <a class="card" href="/stores/index.php?categoria=hospedagens">
               <div class="card__icon"><i class="las la-box"></i></div>
               <div class="card__title">Hospedagem</div>
               <div class="card__text">Planos otimizados para performance, segurança e estabilidade.</div>
               <div class="card__cta">Ver produtos <i class="las la-arrow-right"></i></div>
             </a>
-            <a class="card" href="/produtos">
+            <a class="card" href="/stores/index.php?categoria=servidores-vps">
               <div class="card__icon"><i class="las la-cloud"></i></div>
               <div class="card__title">VPS Cloud</div>
               <div class="card__text">Recursos dedicados, escalabilidade e controle total do servidor.</div>
               <div class="card__cta">Ver produtos <i class="las la-arrow-right"></i></div>
             </a>
-            <a class="card" href="/produtos">
+            <a class="card" href="/stores/index.php">
               <div class="card__icon"><i class="las la-globe"></i></div>
               <div class="card__title">Domínios & SSL</div>
               <div class="card__text">Registre, transfira e proteja com certificados SSL.</div>
@@ -689,6 +712,25 @@
         toast(d ? ('Iniciando transferência de <b>' + d + '</b>... (demo)') : 'Digite um domínio para transferir.');
       });
     }
+
+    // Criar flocos de neve
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.className = 'snowflake';
+      snowflake.innerHTML = '❄';
+      snowflake.style.left = Math.random() * 100 + '%';
+      snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      snowflake.style.opacity = Math.random() * 0.5 + 0.5;
+      snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+      document.getElementById('snowflakes').appendChild(snowflake);
+
+      setTimeout(() => {
+        snowflake.remove();
+      }, 5000);
+    }
+
+    // Criar múltiplos flocos de neve
+    setInterval(createSnowflake, 300);
 
     (async function init() {
       await loadInclude('menu', 'includes/menu.html');
