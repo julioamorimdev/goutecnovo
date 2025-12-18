@@ -88,9 +88,16 @@ $cardColors = [
 
 // Carregar menu e footer (server-side) para evitar dependência de fetch no navegador
 $includesDir = realpath(__DIR__ . '/../includes') ?: (__DIR__ . '/../includes');
-$menuFile = $includesDir . '/menu.html';
+$menuFile = $includesDir . '/menu.php';
 $footerFile = $includesDir . '/footer.html';
-$menuHtml = is_file($menuFile) ? (string)file_get_contents($menuFile) : '<!-- menu.html não encontrado em ' . h($menuFile) . ' -->';
+$menuHtml = '';
+ob_start();
+if (is_file($menuFile)) {
+    require $menuFile;
+} else {
+    echo '<!-- menu.php não encontrado em ' . h($menuFile) . ' -->';
+}
+$menuHtml = ob_get_clean();
 $footerHtml = is_file($footerFile) ? (string)file_get_contents($footerFile) : '';
 
 // Fallback visível caso o footer não exista/esteja vazio no ambiente atual
@@ -192,32 +199,9 @@ if (trim($footerHtml) === '') {
         .brand{ display:flex; align-items:center; gap:12px; }
         .brand__logo{ height: 28px; width:auto; filter: drop-shadow(0 8px 18px rgba(0,0,0,.35)); }
 
-        .topbar__search{
-            flex:1; min-width:220px; position:relative;
-            display:flex; align-items:center;
-            background: rgba(255,255,255,.06);
-            border: 1px solid rgba(255,255,255,.12);
-            border-radius: 12px;
-            padding: 10px 12px;
-            transition: .2s ease;
-        }
-        .topbar__search:focus-within{
-            border-color: rgba(61,214,245,.45);
-            box-shadow: 0 0 0 4px rgba(61,214,245,.12);
-            background: rgba(255,255,255,.08);
-        }
-        .topbar__searchIcon{ position:absolute; left:12px; color: rgba(232,237,247,.7); }
-        .topbar__searchInput{
-            width:100%;
-            padding-left: 30px;
-            border:none; outline:none;
-            background:transparent;
-            color: var(--text);
-            font-size: .95rem;
-        }
-        .topbar__searchInput::placeholder{ color: rgba(232,237,247,.55); }
+        /* Barra de busca removida */
 
-        .nav{ display:flex; align-items:center; gap:10px; }
+        .nav{ display:flex; align-items:center; gap:10px; margin-left:auto; }
         .nav__toggle{
             display:none;
             border:1px solid rgba(255,255,255,.16);
@@ -320,6 +304,39 @@ if (trim($footerHtml) === '') {
             color: #061017;
             background: linear-gradient(90deg, var(--warn), #ffef96);
             border: 1px solid rgba(0,0,0,.35);
+        }
+
+        /* Avatar do usuário */
+        .nav__link--user{
+            display:flex;
+            align-items:center;
+            gap: 10px;
+            padding: 8px 12px;
+        }
+        .nav__user-avatar{
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary2), var(--primary));
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,.15);
+        }
+        .nav__user-initial{
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: #061017;
+            line-height: 1;
+        }
+        .nav__user-name{
+            font-weight: 800;
+            font-size: .95rem;
+            color: rgba(232,237,247,.95);
+        }
+        .nav__item--user .nav__link--btn .la-angle-down{
+            margin-left: 4px;
         }
 
         /* STORE LAYOUT */
@@ -612,7 +629,6 @@ if (trim($footerHtml) === '') {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 16px;
             }
-            .topbar__search{ display:none; }
         }
         @media (max-width: 860px){
             .topbar__inner{ justify-content: space-between; }
@@ -636,6 +652,13 @@ if (trim($footerHtml) === '') {
             .dropdown{ position: static; width: 100%; box-shadow:none; background: rgba(255,255,255,.05); }
             .nav__item--dropdown:hover > .dropdown{ display:none; }
             .nav__item--dropdown.is-open > .dropdown{ display:block; }
+            .nav__user-name{
+                display:none;
+            }
+            .nav__user-avatar{
+                width: 32px;
+                height: 32px;
+            }
             .products-grid{
                 grid-template-columns: 1fr;
             }

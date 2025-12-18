@@ -1,3 +1,73 @@
+<?php
+declare(strict_types=1);
+// Menu dinâmico da Central
+// Garantir que as funções necessárias existam
+if (!function_exists('is_client_logged_in')) {
+    function is_client_logged_in(): bool {
+        if (session_status() === PHP_SESSION_NONE) {
+            @session_start();
+        }
+        return !empty($_SESSION['client_id'] ?? null);
+    }
+}
+if (!function_exists('h')) {
+    function h(string $s): string {
+        return htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    }
+}
+
+// Iniciar sessão se não estiver iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    @session_start();
+}
+
+try {
+    $isLoggedIn = is_client_logged_in();
+    $clientName = $_SESSION['client_name'] ?? '';
+    $clientFirstName = '';
+    $clientInitial = '?';
+
+    if ($isLoggedIn && !empty($clientName)) {
+        $nameParts = explode(' ', trim($clientName));
+        $clientFirstName = $nameParts[0] ?? '';
+        if (!empty($clientFirstName)) {
+            $clientInitial = strtoupper(mb_substr($clientFirstName, 0, 1, 'UTF-8'));
+        }
+    }
+} catch (Throwable $e) {
+    // Em caso de erro, assumir que não está logado
+    $isLoggedIn = false;
+    $clientName = '';
+    $clientFirstName = '';
+    $clientInitial = '?';
+}
+?>
+<style>
+  /* Estilos mínimos do usuário logado (avatar + "Olá, Nome") para funcionar em todas as páginas */
+  .nav__item--user{ margin-left: 4px; }
+  .nav__link--user{ gap: 10px; }
+  .nav__user-avatar{
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.16);
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  }
+  .nav__user-initial{
+    font-weight: 950;
+    letter-spacing: .02em;
+    color: rgba(232,237,247,.95);
+  }
+  .nav__user-name{
+    color: rgba(232,237,247,.92);
+    font-weight: 800;
+    white-space: nowrap;
+  }
+</style>
 <!-- Menu da Central (gerenciável via Admin) -->
 <header class="topbar" role="banner">
   <div class="container topbar__inner">
@@ -11,12 +81,36 @@
       </button>
 
       <ul class="nav__list" data-nav-list>
-        <li class="nav__item">
-          <a class="nav__link" href="/client-area" data-nav-link>
-            <i class="las la-user-circle" aria-hidden="true"></i>
-            Área do Cliente
-          </a>
+        <?php if ($isLoggedIn): ?>
+        <li class="nav__item nav__item--dropdown" data-dropdown>
+          <button class="nav__link nav__link--btn" type="button" data-dropdown-toggle aria-expanded="false">
+            Cliente <i class="las la-angle-down" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown" data-dropdown-menu>
+            <a class="dropdown__item" href="/client-area">
+              <i class="las la-user-circle" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Área do Cliente</div>
+                <div class="dropdown__desc">Acesse sua conta</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/faturas">
+              <i class="las la-file-invoice" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Faturas</div>
+                <div class="dropdown__desc">Pagamentos e histórico</div>
+              </div>
+            </a>
+            <a class="dropdown__item" href="/meus-tickets">
+              <i class="las la-life-ring" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Meus Tickets</div>
+                <div class="dropdown__desc">Acompanhe seus chamados</div>
+              </div>
+            </a>
+          </div>
         </li>
+        <?php endif; ?>
 
         <li class="nav__item nav__item--dropdown" data-dropdown>
           <button class="nav__link nav__link--btn" type="button" data-dropdown-toggle aria-expanded="false">
@@ -90,6 +184,7 @@
           </div>
         </li>
 
+        <?php if (!$isLoggedIn): ?>
         <li class="nav__item nav__item--dropdown" data-dropdown>
           <button class="nav__link nav__link--btn" type="button" data-dropdown-toggle aria-expanded="false">
             Conta <i class="las la-angle-down" aria-hidden="true"></i>
@@ -109,22 +204,9 @@
                 <div class="dropdown__desc">Cadastre-se em poucos passos</div>
               </div>
             </a>
-            <a class="dropdown__item" href="/faturas">
-              <i class="las la-file-invoice" aria-hidden="true"></i>
-              <div>
-                <div class="dropdown__title">Faturas</div>
-                <div class="dropdown__desc">Pagamentos e histórico</div>
-              </div>
-            </a>
-            <a class="dropdown__item" href="/meus-tickets">
-              <i class="las la-life-ring" aria-hidden="true"></i>
-              <div>
-                <div class="dropdown__title">Meus Tickets</div>
-                <div class="dropdown__desc">Acompanhe seus chamados</div>
-              </div>
-            </a>
           </div>
         </li>
+        <?php endif; ?>
 
         <li class="nav__item nav__item--dropdown nav__item--align-right" data-dropdown>
           <button class="nav__link nav__link--btn nav__link--support" type="button" data-dropdown-toggle aria-expanded="false">
@@ -162,6 +244,27 @@
           </div>
         </li>
 
+        <?php if ($isLoggedIn): ?>
+        <li class="nav__item nav__item--dropdown nav__item--align-right nav__item--user" data-dropdown>
+          <button class="nav__link nav__link--btn nav__link--user nav__link--support" type="button" data-dropdown-toggle aria-expanded="false">
+            <div class="nav__user-avatar">
+              <span class="nav__user-initial"><?= h($clientInitial) ?></span>
+            </div>
+            <span class="nav__user-name">Olá, <?= h($clientFirstName ?: 'Cliente') ?></span>
+            <i class="las la-angle-down" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown" data-dropdown-menu>
+            <a class="dropdown__item" href="/sair">
+              <i class="las la-sign-out-alt" aria-hidden="true"></i>
+              <div>
+                <div class="dropdown__title">Sair</div>
+                <div class="dropdown__desc">Encerrar sessão</div>
+              </div>
+            </a>
+          </div>
+        </li>
+        <?php endif; ?>
+
         <li class="nav__item nav__item--cart">
           <a class="nav__cart" href="/carrinho" aria-label="Carrinho">
             <i class="las la-shopping-cart" aria-hidden="true"></i>
@@ -172,5 +275,4 @@
     </nav>
   </div>
 </header>
-
 

@@ -1,0 +1,14 @@
+# Permitir arquivos sem extensão .php
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.*)$ $1.php [L]
+</IfModule>
+
+# Permitir executar arquivos sem extensão como PHP
+<FilesMatch "^(registrar|entrar)$">
+    SetHandler application/x-httpd-php
+</FilesMatch>
+

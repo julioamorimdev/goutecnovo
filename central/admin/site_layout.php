@@ -11,7 +11,7 @@ $page_title = 'Central • Menu e Footer';
 $active = 'site_layout';
 
 $includesDir = realpath(__DIR__ . '/../includes') ?: (__DIR__ . '/../includes');
-$menuFile = $includesDir . '/menu.html';
+$menuFile = $includesDir . '/menu.php';
 $footerFile = $includesDir . '/footer.html';
 
 if (!is_dir($includesDir)) {
@@ -31,9 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $menu = (string)($_POST['menu_html'] ?? '');
     $footer = (string)($_POST['footer_html'] ?? '');
 
-    // Proteção simples: não permitir PHP aqui (evita execução acidental).
-    if (stripos($menu, '<?php') !== false || stripos($footer, '<?php') !== false) {
-        $error = 'Não é permitido inserir código PHP aqui. Use apenas HTML.';
+    // Proteção simples: não permitir PHP no footer (menu agora é PHP e pode conter lógica de sessão).
+    if (stripos($footer, '<?php') !== false) {
+        $error = 'Não é permitido inserir código PHP no footer. Use apenas HTML.';
     } else {
         $ok1 = @file_put_contents($menuFile, $menu) !== false;
         $ok2 = @file_put_contents($footerFile, $footer) !== false;
@@ -60,7 +60,7 @@ require_once __DIR__ . '/partials/layout_start.php';
 
 <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
   <div class="text-body-secondary small">
-    Edite os arquivos da Central: <code>/central/includes/menu.html</code> e <code>/central/includes/footer.html</code>.
+    Edite os arquivos da Central: <code>/central/includes/menu.php</code> e <code>/central/includes/footer.html</code>.
   </div>
   <a class="btn btn-sm btn-outline-dark" href="/" target="_blank" rel="noopener noreferrer">
     <i class="las la-external-link-alt me-1"></i> Ver Central
@@ -75,7 +75,7 @@ require_once __DIR__ . '/partials/layout_start.php';
       <ul class="nav nav-tabs" id="layoutTabs" role="tablist">
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="tab-menu" data-bs-toggle="tab" data-bs-target="#pane-menu" type="button" role="tab">
-            <i class="las la-stream me-1"></i> Menu (HTML)
+            <i class="las la-stream me-1"></i> Menu (PHP)
           </button>
         </li>
         <li class="nav-item" role="presentation">

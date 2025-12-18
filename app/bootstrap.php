@@ -70,4 +70,15 @@ function require_admin(): void {
     }
 }
 
+function is_client_logged_in(): bool {
+    return !empty($_SESSION['client_id']);
+}
+
+function require_client(): void {
+    if (!is_client_logged_in()) {
+        header('Location: /entrar');
+        exit;
+    }
+}
+
 
