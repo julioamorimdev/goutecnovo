@@ -1,18 +1,17 @@
 <?php
 declare(strict_types=1);
-// Garantir UTF-8 antes de qualquer output
-if (!headers_sent()) {
-    header('Content-Type: text/html; charset=utf-8');
-}
 require_once __DIR__ . '/../../app/bootstrap.php';
 require_once __DIR__ . '/../../app/menu.php';
 
-$page_title = 'Editar item do menu';
-$active = 'menu';
+// Garantir UTF-8 na conexão
+db()->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+db()->exec("SET CHARACTER SET utf8mb4");
+db()->exec("SET character_set_connection=utf8mb4");
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $page_title = $id ? 'Editar item do menu' : 'Novo item do menu';
-require_once __DIR__ . '/partials/layout_start.php';
+$active = 'menu';
+
 $item = [
     'label' => '',
     'url' => '',
@@ -32,19 +31,7 @@ if ($id <= 0 && isset($_GET['parent_id']) && $_GET['parent_id'] !== '') {
     $item['parent_id'] = (int)$_GET['parent_id'];
 }
 
-if ($id > 0) {
-    $stmt = db()->prepare("SELECT * FROM menu_items WHERE id=?");
-    $stmt->execute([$id]);
-    $row = $stmt->fetch();
-    if (!$row) {
-        http_response_code(404);
-        exit('Item não encontrado.');
-    }
-    $item = array_merge($item, $row);
-}
-
-$parents = db()->query("SELECT id, label FROM menu_items WHERE parent_id IS NULL ORDER BY sort_order ASC, id ASC")->fetchAll();
-
+// Processar POST ANTES de qualquer output HTML
 $error = null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_verify($_POST['_csrf'] ?? null);
@@ -81,6 +68,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $item = array_merge($item, $data);
 }
+
+// Buscar dados do item se estiver editando
+if ($id > 0) {
+    $stmt = db()->prepare("SELECT * FROM menu_items WHERE id=?");
+    $stmt->execute([$id]);
+    $row = $stmt->fetch();
+    if (!$row) {
+        http_response_code(404);
+        exit('Item não encontrado.');
+    }
+    $item = array_merge($item, $row);
+}
+
+$parents = db()->query("SELECT id, label FROM menu_items WHERE parent_id IS NULL ORDER BY sort_order ASC, id ASC")->fetchAll();
+
+require_once __DIR__ . '/partials/layout_start.php';
 ?>
 <?php if ($error): ?>
     <div class="alert alert-danger"><?= h($error) ?></div>

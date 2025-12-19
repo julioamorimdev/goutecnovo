@@ -53,15 +53,48 @@ function site_logo_current(string $theme, string $fallback): string {
 $logoDarkTheme = site_logo_current('light', 'assets/img/logo-light.png'); // tema escuro do site usa logo "light"
 $logoLightTheme = site_logo_current('dark', 'assets/img/logo-dark.png'); // tema claro do site usa logo "dark"
 
+/**
+ * Corrige encoding corrompido (UTF-8 sendo interpretado como Latin1)
+ * Exemplo: "Ãrea" -> "Área"
+ */
+function fix_encoding(string $text): string {
+    if ($text === '') return $text;
+
+    // Isso aqui é o caso clássico do seu bug:
+    // - 1x: "vocÃª"  -> "você"
+    // - 2x: "vocÃÂª" -> "vocÃª" -> "você"
+    //
+    // A correção mais confiável é aplicar utf8_decode 1–3x enquanto ainda existir "cara de mojibake".
+    $cur = $text;
+    for ($i = 0; $i < 3; $i++) {
+        if (
+            !str_contains($cur, 'Ã')
+            && !str_contains($cur, 'Â')
+            && !str_contains($cur, 'â€')
+            && !str_contains($cur, 'â€™')
+            && !str_contains($cur, '�')
+        ) {
+            break;
+        }
+
+        $next = @utf8_decode($cur);
+        if (!is_string($next) || $next === $cur) break;
+        $cur = $next;
+    }
+
+    return $cur;
+}
+
 function render_menu_item(array $item): void {
-    $label = h($item['label'] ?? '');
+    $label = h(fix_encoding($item['label'] ?? ''));
     $url = $item['url'] ?: '#';
     $target = !empty($item['open_new_tab']) ? ' target="_blank" rel="noopener noreferrer"' : '';
     $children = $item['children'] ?? [];
 
     if (!empty($item['custom_html'])) {
         // HTML customizado (admin-only). Renderiza exatamente como está no banco.
-        echo $item['custom_html'];
+        // Mas pode ter vindo com mojibake do banco — então corrigimos antes de imprimir.
+        echo fix_encoding((string)$item['custom_html']);
         return;
     }
 
@@ -80,11 +113,11 @@ function render_menu_item(array $item): void {
             echo '<span class="h6 d-block fs-18">' . $label . '</span>';
             echo '<ul class="contain-mega-menu__list list-unstyled">';
             foreach ($children as $child) {
-                $childLabel = h($child['label'] ?? '');
+                $childLabel = h(fix_encoding($child['label'] ?? ''));
                 $childUrl = $child['url'] ?: '#';
                 $childTarget = !empty($child['open_new_tab']) ? ' target="_blank" rel="noopener noreferrer"' : '';
                 $iconClass = trim((string)($child['icon_class'] ?? ''));
-                $desc = trim((string)($child['description'] ?? ''));
+                $desc = h(fix_encoding(trim((string)($child['description'] ?? ''))));
 
                 echo '<li>';
                 echo '<a href="' . h($childUrl) . '" class="contain-mega-menu__link text-decoration-none d-flex align-items-start gap-2"' . $childTarget . '>';
@@ -111,12 +144,12 @@ function render_menu_item(array $item): void {
         echo '<a class="nav-link fw-medium" href="#">' . $label . '</a>';
         echo '<ul class="contain-sub-1__content' . $layout . ' list-unstyled">';
         foreach ($children as $child) {
-            $childLabel = h($child['label'] ?? '');
+            $childLabel = h(fix_encoding($child['label'] ?? ''));
             $childUrl = $child['url'] ?: '#';
             $childTarget = !empty($child['open_new_tab']) ? ' target="_blank" rel="noopener noreferrer"' : '';
             $iconClass = trim((string)($child['icon_class'] ?? ''));
-            $desc = trim((string)($child['description'] ?? ''));
-            $badgeText = trim((string)($child['badge_text'] ?? ''));
+            $desc = h(fix_encoding(trim((string)($child['description'] ?? ''))));
+            $badgeText = h(fix_encoding(trim((string)($child['badge_text'] ?? ''))));
             $badgeClass = trim((string)($child['badge_class'] ?? ''));
 
             echo '<li>';

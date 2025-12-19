@@ -51,19 +51,39 @@ try {
         </div>
         <?php if (!empty($feedbacks)): ?>
             <div class="mt-8 position-relative" data-sal="fade" data-sal-duration="1500" data-sal-delay="200" data-sal-easing="ease-in-out-sine">
+                <style>
+                    .feedback-slider .swiper-slide {
+                        height: auto;
+                        display: flex;
+                    }
+                    .feedback-slider .swiper-slide > div {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                    }
+                </style>
                 <div class="feedback-slider swiper">
                     <div class="swiper-wrapper">
                         <?php foreach ($feedbacks as $fb): ?>
                             <div class="swiper-slide">
-                                <div class="bg-white p-7 shadow-sm rounded-3">
-                                    <div class="d-flex align-items-center justify-content-between border-bottom border-secondary pb-5">
-                                        <img src="<?= h($fb['brand_image']) ?>" alt="image" class="img-fluid">
-                                        <img src="/assets/img/shape/feedback-quate.png" alt="image" class="img-fluid">
-                                    </div>
-                                    <h6 class="mt-5"><?= h($fb['title']) ?></h6>
-                                    <p class="mt-3"><?= h($fb['text']) ?></p>
+                                <div class="bg-white p-7 shadow-sm rounded-3 h-100 d-flex flex-column">
+                                    <?php 
+                                    $showBrand = !isset($fb['show_brand_image']) || (int)($fb['show_brand_image'] ?? 1) === 1;
+                                    if (!empty($fb['brand_image']) && $showBrand): 
+                                    ?>
+                                        <div class="d-flex align-items-center justify-content-between border-bottom border-secondary pb-5">
+                                            <img src="<?= h($fb['brand_image']) ?>" alt="image" class="img-fluid" style="max-height: 40px;">
+                                            <img src="/assets/img/shape/feedback-quate.png" alt="image" class="img-fluid">
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="d-flex align-items-center justify-content-end border-bottom border-secondary pb-5">
+                                            <img src="/assets/img/shape/feedback-quate.png" alt="image" class="img-fluid">
+                                        </div>
+                                    <?php endif; ?>
+                                    <h6 class="mt-5 mb-0"><?= h($fb['title']) ?></h6>
+                                    <p class="mt-3 mb-0 flex-grow-1" style="min-height: 60px;"><?= h($fb['text']) ?></p>
                                     <div class="d-flex align-items-center gap-4 mt-7">
-                                        <img src="<?= h($fb['person_image']) ?>" alt="<?= h($fb['person_name']) ?>" class="img-fluid">
+                                        <img src="<?= h($fb['person_image']) ?>" alt="<?= h($fb['person_name']) ?>" class="img-fluid" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%; flex-shrink: 0;">
                                         <div>
                                             <h6 class="fs-16 mb-0"><?= h($fb['person_name']) ?></h6>
                                             <small><?= h($fb['person_role']) ?></small>

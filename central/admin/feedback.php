@@ -1,15 +1,13 @@
 <?php
 declare(strict_types=1);
-// Garantir UTF-8 antes de qualquer output
-if (!headers_sent()) {
-    header('Content-Type: text/html; charset=utf-8');
-}
 require_once __DIR__ . '/../../app/bootstrap.php';
 
-$page_title = 'Feedbacks';
-$active = 'feedback';
-require_once __DIR__ . '/partials/layout_start.php';
+// Garantir UTF-8 na conexão
+db()->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+db()->exec("SET CHARACTER SET utf8mb4");
+db()->exec("SET character_set_connection=utf8mb4");
 
+// Processar POST ANTES de qualquer output HTML
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_verify($_POST['_csrf'] ?? null);
 
@@ -73,6 +71,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$page_title = 'Feedbacks';
+$active = 'feedback';
+require_once __DIR__ . '/partials/layout_start.php';
+
+// Função para normalizar caminho de imagem para usar o domínio principal
+function normalize_image_path(string $path): string {
+    if (empty($path)) return $path;
+    
+    // Se já é uma URL completa, retornar como está
+    if (preg_match('/^https?:\/\//', $path)) {
+        return $path;
+    }
+    
+    // Se começa com /, adicionar o domínio principal
+    if (strpos($path, '/') === 0) {
+        return 'https://goutec.com.br' . $path;
+    }
+    
+    return $path;
+}
+
 $feedbacks = db()->query("SELECT * FROM feedback_items ORDER BY sort_order ASC, id ASC")->fetchAll();
 ?>
 
@@ -111,7 +130,7 @@ $feedbacks = db()->query("SELECT * FROM feedback_items ORDER BY sort_order ASC, 
                             ?>
                             <tr>
                                 <td>
-                                    <img src="<?= h($fb['person_image']) ?>" alt="<?= h($fb['person_name']) ?>" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+                                    <img src="<?= h(normalize_image_path($fb['person_image'])) ?>" alt="<?= h($fb['person_name']) ?>" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
                                 </td>
                                 <td>
                                     <strong><?= h($fb['person_name']) ?></strong>

@@ -87,7 +87,9 @@ server {
     # Proxy reverso para o container Docker na porta 8093
     # Apontando para o diretório /central
     location / {
-        proxy_pass http://localhost:8093/central/;
+        # Usar rewrite para garantir que o caminho seja tratado corretamente
+        rewrite ^(.*)$ /central$1 break;
+        proxy_pass http://localhost:8093;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;

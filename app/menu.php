@@ -16,8 +16,17 @@ function menu_fetch_all_enabled(): array {
 }
 
 function menu_fetch_all(): array {
-    $stmt = db()->query("SELECT * FROM menu_items ORDER BY parent_id IS NOT NULL, parent_id ASC, sort_order ASC, id ASC");
-    return $stmt->fetchAll();
+    try {
+        // Garantir UTF-8 na conexão
+        db()->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+        db()->exec("SET CHARACTER SET utf8mb4");
+        db()->exec("SET character_set_connection=utf8mb4");
+        
+        $stmt = db()->query("SELECT * FROM menu_items ORDER BY parent_id IS NOT NULL, parent_id ASC, sort_order ASC, id ASC");
+        return $stmt->fetchAll();
+    } catch (Throwable $e) {
+        return [];
+    }
 }
 
 function menu_build_tree(array $items): array {

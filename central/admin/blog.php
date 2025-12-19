@@ -84,7 +84,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $posts = db()->query("SELECT * FROM blog_posts ORDER BY is_featured DESC, sort_order ASC, id ASC")->fetchAll();
+
+// Função para normalizar caminho de imagem para usar o domínio principal
+function normalize_blog_image_path(string $path): string {
+    if (empty($path)) return $path;
+    
+    // Se já é uma URL completa, retornar como está
+    if (preg_match('/^https?:\/\//', $path)) {
+        return $path;
+    }
+    
+    // Se começa com /, adicionar o domínio principal
+    if (strpos($path, '/') === 0) {
+        return 'https://goutec.com.br' . $path;
+    }
+    
+    return $path;
+}
 ?>
+
+<?php if (isset($_GET['success']) && $_GET['success'] === '1'): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="las la-check-circle me-2"></i>Artigo salvo com sucesso!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+<?php endif; ?>
 
 <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-3">
     <div class="text-body-secondary small">Gerencie os artigos do blog exibidos na página inicial.</div>
@@ -123,9 +147,12 @@ $posts = db()->query("SELECT * FROM blog_posts ORDER BY is_featured DESC, sort_o
                             ?>
                             <tr>
                                 <td>
-                                    <?php if (!empty($post['image'])): ?>
+                                    <?php 
+                                    $imagePath = normalize_blog_image_path($post['image'] ?? '');
+                                    ?>
+                                    <?php if (!empty($imagePath)): ?>
                                         <div style="width: 80px; height: 60px; position: relative; border: 1px solid #dee2e6; border-radius: 4px; overflow: hidden; background: #f8f9fa;">
-                                            <img src="<?= h($post['image']) ?>" alt="<?= h($post['title']) ?>" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#6c757d;\'>Sem imagem</div>';">
+                                            <img src="<?= h($imagePath) ?>" alt="<?= h($post['title']) ?>" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#6c757d;\'>Sem imagem</div>';">
                                         </div>
                                     <?php else: ?>
                                         <div style="width: 80px; height: 60px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #6c757d;">

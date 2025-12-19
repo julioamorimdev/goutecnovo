@@ -1,10 +1,11 @@
 <?php
 declare(strict_types=1);
-// Garantir UTF-8 antes de qualquer output
-if (!headers_sent()) {
-    header('Content-Type: text/html; charset=utf-8');
-}
 require_once __DIR__ . '/../../app/bootstrap.php';
+
+// Garantir UTF-8 na conexão
+db()->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+db()->exec("SET CHARACTER SET utf8mb4");
+db()->exec("SET character_set_connection=utf8mb4");
 
 $type = $_GET['type'] ?? 'section'; // 'section' ou 'link'
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -12,7 +13,6 @@ $sectionId = isset($_GET['section_id']) ? (int)$_GET['section_id'] : 0;
 
 $page_title = $id ? 'Editar ' . ($type === 'section' ? 'seção' : 'link') : 'Nova ' . ($type === 'section' ? 'seção' : 'link');
 $active = 'footer';
-require_once __DIR__ . '/partials/layout_start.php';
 
 $error = null;
 
@@ -23,17 +23,7 @@ if ($type === 'section') {
         'is_enabled' => 1,
     ];
 
-    if ($id > 0) {
-        $stmt = db()->prepare("SELECT * FROM footer_sections WHERE id=?");
-        $stmt->execute([$id]);
-        $row = $stmt->fetch();
-        if (!$row) {
-            http_response_code(404);
-            exit('Seção não encontrada.');
-        }
-        $item = array_merge($item, $row);
-    }
-
+    // Processar POST ANTES de qualquer output HTML
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         csrf_verify($_POST['_csrf'] ?? null);
 
@@ -47,6 +37,11 @@ if ($type === 'section') {
         ];
 
         if (!$error) {
+            // Garantir UTF-8 antes de salvar
+            db()->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+            db()->exec("SET CHARACTER SET utf8mb4");
+            db()->exec("SET character_set_connection=utf8mb4");
+            
             if ($id > 0) {
                 $stmt = db()->prepare("UPDATE footer_sections SET title=:title, sort_order=:sort_order, is_enabled=:is_enabled WHERE id=:id");
                 $data['id'] = $id;
@@ -60,6 +55,18 @@ if ($type === 'section') {
         }
         $item = array_merge($item, $data);
     }
+    
+    // Buscar dados do item se estiver editando
+    if ($id > 0) {
+        $stmt = db()->prepare("SELECT * FROM footer_sections WHERE id=?");
+        $stmt->execute([$id]);
+        $row = $stmt->fetch();
+        if (!$row) {
+            http_response_code(404);
+            exit('Seção não encontrada.');
+        }
+        $item = array_merge($item, $row);
+    }
 } else { // type === 'link'
     $item = [
         'section_id' => $sectionId ?: null,
@@ -69,17 +76,7 @@ if ($type === 'section') {
         'is_enabled' => 1,
     ];
 
-    if ($id > 0) {
-        $stmt = db()->prepare("SELECT * FROM footer_links WHERE id=?");
-        $stmt->execute([$id]);
-        $row = $stmt->fetch();
-        if (!$row) {
-            http_response_code(404);
-            exit('Link não encontrado.');
-        }
-        $item = array_merge($item, $row);
-    }
-
+    // Processar POST ANTES de qualquer output HTML
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         csrf_verify($_POST['_csrf'] ?? null);
 
@@ -100,6 +97,11 @@ if ($type === 'section') {
         ];
 
         if (!$error) {
+            // Garantir UTF-8 antes de salvar
+            db()->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+            db()->exec("SET CHARACTER SET utf8mb4");
+            db()->exec("SET character_set_connection=utf8mb4");
+            
             if ($id > 0) {
                 $stmt = db()->prepare("UPDATE footer_links SET section_id=:section_id, label=:label, url=:url, sort_order=:sort_order, is_enabled=:is_enabled WHERE id=:id");
                 $data['id'] = $id;
@@ -114,8 +116,22 @@ if ($type === 'section') {
         $item = array_merge($item, $data);
     }
     
+    // Buscar dados do item se estiver editando
+    if ($id > 0) {
+        $stmt = db()->prepare("SELECT * FROM footer_links WHERE id=?");
+        $stmt->execute([$id]);
+        $row = $stmt->fetch();
+        if (!$row) {
+            http_response_code(404);
+            exit('Link não encontrado.');
+        }
+        $item = array_merge($item, $row);
+    }
+    
     $sections = db()->query("SELECT id, title FROM footer_sections ORDER BY sort_order ASC, id ASC")->fetchAll();
 }
+
+require_once __DIR__ . '/partials/layout_start.php';
 ?>
 
 <?php if ($error): ?>

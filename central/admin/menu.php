@@ -1,9 +1,5 @@
 <?php
 declare(strict_types=1);
-// Garantir UTF-8 antes de qualquer output
-if (!headers_sent()) {
-    header('Content-Type: text/html; charset=utf-8');
-}
 require_once __DIR__ . '/../../app/bootstrap.php';
 require_once __DIR__ . '/../../app/menu.php';
 
@@ -12,10 +8,7 @@ db()->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
 db()->exec("SET CHARACTER SET utf8mb4");
 db()->exec("SET character_set_connection=utf8mb4");
 
-$page_title = 'Menu do site';
-$active = 'menu';
-require_once __DIR__ . '/partials/layout_start.php';
-
+// Processar POST ANTES de qualquer output HTML
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_verify($_POST['_csrf'] ?? null);
 
@@ -79,6 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
+
+$page_title = 'Menu do site';
+$active = 'menu';
+require_once __DIR__ . '/partials/layout_start.php';
 
 $tree = menu_build_tree(menu_fetch_all());
 

@@ -25,22 +25,61 @@ function footer_get_setting(string $key, string $default = ''): string {
         $settings = [];
         try {
             if (function_exists('db')) {
+                // Garantir UTF-8 na conexão
+                db()->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+                db()->exec("SET CHARACTER SET utf8mb4");
+                db()->exec("SET character_set_connection=utf8mb4");
+                
                 $stmt = db()->query("SELECT setting_key, setting_value FROM footer_settings");
                 foreach ($stmt->fetchAll() as $row) {
-                    $settings[$row['setting_key']] = $row['setting_value'] ?? '';
+                    $value = $row['setting_value'] ?? '';
+                    // Corrigir encoding se necessário
+                    $settings[$row['setting_key']] = function_exists('fix_encoding') ? fix_encoding($value) : $value;
                 }
             }
         } catch (Throwable $e) {
             // Tabela pode não existir ainda
         }
     }
-    return $settings[$key] ?? $default;
+    $value = $settings[$key] ?? $default;
+    return function_exists('fix_encoding') ? fix_encoding($value) : $value;
 }
 
 if (!function_exists('h')) {
     function h(?string $s): string {
         return htmlspecialchars($s ?? '', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     }
+}
+
+/**
+ * Corrige encoding corrompido (UTF-8 sendo interpretado como Latin1)
+ * Exemplo: "Ãrea" -> "Área", "vocÃª" -> "você"
+ */
+function fix_encoding(string $text): string {
+    if ($text === '') return $text;
+
+    // Mesmo racional do header: os seus casos são 1x ou 2x "mojibake".
+    // Aplicar utf8_decode 1–3x corrige:
+    // - "vocÃª" -> "você"
+    // - "vocÃÂª" -> "vocÃª" -> "você"
+    $cur = $text;
+    for ($i = 0; $i < 3; $i++) {
+        if (
+            !str_contains($cur, 'Ã')
+            && !str_contains($cur, 'Â')
+            && !str_contains($cur, 'â€')
+            && !str_contains($cur, 'â€™')
+            && !str_contains($cur, '�')
+        ) {
+            break;
+        }
+
+        $next = @utf8_decode($cur);
+        if (!is_string($next) || $next === $cur) break;
+        $cur = $next;
+    }
+
+    return $cur;
 }
 
 // Buscar seções e links do footer
@@ -68,9 +107,9 @@ try {
 
 // Configurações do footer
 $logoUrl = footer_get_setting('logo_url', 'assets/img/logo-dark.png');
-$description = footer_get_setting('description', 'Se você tem um site de e-commerce ou um site de negócios, você quer atrair o maior número de visitantes possível ou quando você não quer mais ser limitado por');
+$description = fix_encoding(footer_get_setting('description', 'Se você tem um site de e-commerce ou um site de negócios, você quer atrair o maior número de visitantes possível ou quando você não quer mais ser limitado por'));
 $showNewsletter = footer_get_setting('show_newsletter', '1') === '1';
-$copyright = footer_get_setting('copyright', '&copy; 2024 GouTec. Todos os direitos reservados');
+$copyright = fix_encoding(footer_get_setting('copyright', '&copy; 2024 GouTec. Todos os direitos reservados'));
 
 // Redes sociais
 $socialLinks = [
@@ -119,13 +158,13 @@ $socialLinks = [
             ?>
                 <div class="<?= h($colClass) ?>">
                     <div class="ps-xl-10">
-                        <h6 class="fs-16 mt-3 mb-10"><?= h($sec['title']) ?></h6>
+                        <h6 class="fs-16 mt-3 mb-10"><?= h(fix_encoding($sec['title'] ?? '')) ?></h6>
                         <?php if (!empty($links)): ?>
                             <ul class="list-unstyled d-flex flex-column gap-2">
                                 <?php foreach ($links as $link): ?>
                                     <li>
                                         <a href="<?= h($link['url']) ?>" class="text-decoration-none text-body hover:text-primary fs-14">
-                                            <?= h($link['label']) ?>
+                                            <?= h(fix_encoding($link['label'] ?? '')) ?>
                                         </a>
                                     </li>
                                 <?php endforeach; ?>
