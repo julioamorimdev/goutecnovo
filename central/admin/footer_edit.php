@@ -17,7 +17,7 @@ $active = 'footer';
 $error = null;
 
 if ($type === 'section') {
-    $item = [
+    $footer_item = [
         'title' => '',
         'sort_order' => 0,
         'is_enabled' => 1,
@@ -53,22 +53,26 @@ if ($type === 'section') {
             header('Location: /admin/footer.php');
             exit;
         }
-        $item = array_merge($item, $data);
+        // Se houver erro, manter os dados do POST para exibir no formulário
+        $footer_item = array_merge($footer_item, $data);
     }
     
-    // Buscar dados do item se estiver editando
+    // Buscar dados do item se estiver editando (ANTES do layout para ter os dados disponíveis)
     if ($id > 0) {
         $stmt = db()->prepare("SELECT * FROM footer_sections WHERE id=?");
         $stmt->execute([$id]);
         $row = $stmt->fetch();
         if (!$row) {
-            http_response_code(404);
-            exit('Seção não encontrada.');
+            require_once __DIR__ . '/partials/layout_start.php';
+            echo '<div class="alert alert-danger">Seção não encontrada.</div>';
+            echo '<a class="btn btn-outline-dark" href="/admin/footer.php">Voltar</a>';
+            require_once __DIR__ . '/partials/layout_end.php';
+            exit;
         }
-        $item = array_merge($item, $row);
+        $footer_item = array_merge($footer_item, $row);
     }
 } else { // type === 'link'
-    $item = [
+    $footer_item = [
         'section_id' => $sectionId ?: null,
         'label' => '',
         'url' => '',
@@ -113,19 +117,23 @@ if ($type === 'section') {
             header('Location: /admin/footer.php');
             exit;
         }
-        $item = array_merge($item, $data);
+        // Se houver erro, manter os dados do POST para exibir no formulário
+        $footer_item = array_merge($footer_item, $data);
     }
     
-    // Buscar dados do item se estiver editando
+    // Buscar dados do item se estiver editando (ANTES do layout para ter os dados disponíveis)
     if ($id > 0) {
         $stmt = db()->prepare("SELECT * FROM footer_links WHERE id=?");
         $stmt->execute([$id]);
         $row = $stmt->fetch();
         if (!$row) {
-            http_response_code(404);
-            exit('Link não encontrado.');
+            require_once __DIR__ . '/partials/layout_start.php';
+            echo '<div class="alert alert-danger">Link não encontrado.</div>';
+            echo '<a class="btn btn-outline-dark" href="/admin/footer.php">Voltar</a>';
+            require_once __DIR__ . '/partials/layout_end.php';
+            exit;
         }
-        $item = array_merge($item, $row);
+        $footer_item = array_merge($footer_item, $row);
     }
     
     $sections = db()->query("SELECT id, title FROM footer_sections ORDER BY sort_order ASC, id ASC")->fetchAll();
@@ -143,19 +151,39 @@ require_once __DIR__ . '/partials/layout_start.php';
         <form method="post">
             <input type="hidden" name="_csrf" value="<?= h(csrf_token()) ?>">
 
+            <?php
+            // Garantir que $footer_item está definido
+            if (!isset($footer_item) || !is_array($footer_item)) {
+                if ($type === 'section') {
+                    $footer_item = [
+                        'title' => '',
+                        'sort_order' => 0,
+                        'is_enabled' => 1,
+                    ];
+                } else {
+                    $footer_item = [
+                        'section_id' => $sectionId ?: null,
+                        'label' => '',
+                        'url' => '',
+                        'sort_order' => 0,
+                        'is_enabled' => 1,
+                    ];
+                }
+            }
+            ?>
             <?php if ($type === 'section'): ?>
                 <div class="row g-3">
                     <div class="col-md-8">
                         <label class="form-label">Título da seção</label>
-                        <input class="form-control" name="title" value="<?= h($item['title']) ?>" required>
+                        <input class="form-control" name="title" value="<?= h($footer_item['title'] ?? '') ?>" required>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Ordem</label>
-                        <input class="form-control" type="number" name="sort_order" value="<?= h((string)$item['sort_order']) ?>">
+                        <input class="form-control" type="number" name="sort_order" value="<?= h((string)($footer_item['sort_order'] ?? 0)) ?>">
                     </div>
                     <div class="col-12">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="is_enabled" id="is_enabled" <?= ((int)$item['is_enabled'] === 1) ? 'checked' : '' ?>>
+                            <input class="form-check-input" type="checkbox" name="is_enabled" id="is_enabled" <?= ((int)($footer_item['is_enabled'] ?? 1) === 1) ? 'checked' : '' ?>>
                             <label class="form-check-label" for="is_enabled">Ativo</label>
                         </div>
                     </div>
@@ -167,7 +195,7 @@ require_once __DIR__ . '/partials/layout_start.php';
                         <select class="form-select" name="section_id" required>
                             <option value="">Selecione uma seção</option>
                             <?php foreach ($sections as $sec): ?>
-                                <option value="<?= (int)$sec['id'] ?>" <?= ((string)$item['section_id'] === (string)$sec['id']) ? 'selected' : '' ?>>
+                                <option value="<?= (int)$sec['id'] ?>" <?= ((string)($footer_item['section_id'] ?? '') === (string)$sec['id']) ? 'selected' : '' ?>>
                                     <?= h($sec['title']) ?>
                                 </option>
                             <?php endforeach; ?>
@@ -175,19 +203,19 @@ require_once __DIR__ . '/partials/layout_start.php';
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Ordem</label>
-                        <input class="form-control" type="number" name="sort_order" value="<?= h((string)$item['sort_order']) ?>">
+                        <input class="form-control" type="number" name="sort_order" value="<?= h((string)($footer_item['sort_order'] ?? 0)) ?>">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Rótulo</label>
-                        <input class="form-control" name="label" value="<?= h($item['label']) ?>" required>
+                        <input class="form-control" name="label" value="<?= h($footer_item['label'] ?? '') ?>" required>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">URL</label>
-                        <input class="form-control" name="url" value="<?= h($item['url']) ?>" placeholder="ex: shared-hosting.html" required>
+                        <input class="form-control" name="url" value="<?= h($footer_item['url'] ?? '') ?>" placeholder="ex: shared-hosting.html" required>
                     </div>
                     <div class="col-12">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="is_enabled" id="is_enabled" <?= ((int)$item['is_enabled'] === 1) ? 'checked' : '' ?>>
+                            <input class="form-check-input" type="checkbox" name="is_enabled" id="is_enabled" <?= ((int)($footer_item['is_enabled'] ?? 1) === 1) ? 'checked' : '' ?>>
                             <label class="form-check-label" for="is_enabled">Ativo</label>
                         </div>
                     </div>

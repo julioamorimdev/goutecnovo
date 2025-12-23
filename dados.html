@@ -1,0 +1,2420 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <!--required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--meta-->
+    <meta name="description" content="WriteBot ai content generator and writing assistant for saas platform">
+    <meta name="author" content="ThemeTags">
+    <meta name="keywords" content="ai, ai assistant, ai content writer, ai copywriting">
+    <!--favicon icon-->
+    <link rel="icon" href="assets/img/favicon.png" type="image/png" sizes="16x16">
+
+    <!--title-->
+    <title>Control Panel - Hostingard</title>
+
+    <!--build:css-->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- endbuild -->
+</head>
+
+<body class="bg-secondary">
+
+    <!--preloader start-->
+    <div class="preloader bg-light-subtle">
+        <div class="preloader-wrap">
+            <img src="assets/img/logo-dark.png" alt="logo" class="img-fluid">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+    <!--preloader end-->
+    <!-- Header -->
+    <div class="navbar-overlay bg-body bg-opacity-5">
+        <!-- Primary Header -->
+        <nav class="navbar navbar-1 navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand logo" href="index.html">
+                    <img src="assets/img/logo-light.png" alt="image" class="logo__img">
+                    <img src="assets/img/logo-dark.png" alt="image" class="logo__img logo__sticky">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#primaryMenu" aria-expanded="false">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="primaryMenu">
+                    <ul class="navbar-nav align-items-lg-center gap-lg-3 ms-auto">
+                        <li class="nav-item contain-sub-1 contain-sub-1--alter">
+                            <a class="nav-link fw-medium active" aria-current="page" href="index.html">Home</a>
+                            <ul class="contain-sub-1__content contain-sub-1__content-xl home_style list-unstyled">
+                                <li>
+                                    <a href="index.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-vps-server.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Data Center</span>
+                                        <span class="contain-sub-1__description">Secure, reliable, scalable data center hosting with 24/7 support.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index-2.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-web-hosting.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Web Hosting</span>
+                                        <span class="contain-sub-1__description">
+                                                Reliable web hosting with fast speeds, 24/7 support & security.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index-3.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-dedicated-server.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Isomatic</span>
+                                        <span class="contain-sub-1__description">
+                                                Isomatic hosting: reliable, secure, fast, with 24/7 support.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="vps-server.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-vps-server.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">VPS Hosting</span>
+                                        <span class="contain-sub-1__description">
+                                                Virtual machine that provides virtualized server resources
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="game-server.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-game-server.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Game Hosting</span>
+                                        <span class="contain-sub-1__description">
+                                                virtual servers running in a cloud computing environment
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="wp-hosting.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-wp-hosting.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Wordpress Hosting</span>
+                                        <span class="contain-sub-1__description">
+                                                WordPress hosting built for performance and managed
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="cloud-hosting.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-cloud-server.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Cloud Hosting</span>
+                                        <span class="contain-sub-1__description">
+                                                virtual servers running in a cloud computing environment</span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index-8.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-security.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Modern  Home</span>
+                                        <span class="contain-sub-1__description">
+                                                Modern Home hosting: secure, reliable, fast, with 24/7 support.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index-9.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-ssl.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Web Hosting Modern</span>
+                                        <span class="contain-sub-1__description">
+                                                fast, secure, dependable, with round-the-clock support.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index-10.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-about.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Business Solution</span>
+                                        <span class="contain-sub-1__description">
+                                                fast, secure, dependable, with round-the-clock support.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index-11.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-about.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Dedicated Server </span>
+                                        <span class="contain-sub-1__description">
+                                                fast, secure, dependable, with round-the-clock support.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index-12.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-about.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Game Hosting-2 </span>
+                                        <span class="contain-sub-1__description">
+                                                fast, secure, dependable, with round-the-clock support.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index-14.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-cloud-server.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Home Slider </span>
+                                        <span class="contain-sub-1__description">
+                                                fast, secure, dependable, with round-the-clock support.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index-15.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-wp-hosting.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Hosting Global </span>
+                                        <span class="contain-sub-1__description">
+                                                fast, secure, dependable, with round-the-clock support.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index-16.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-wp-hosting.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Fast Hosting </span>
+                                        <span class="contain-sub-1__description">
+                                                fast, secure, dependable, with round-the-clock support.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index-17.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-wp-hosting.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Web Hosting Dark</span>
+                                        <span class="contain-sub-1__description">
+                                                fast, secure, dependable, with round-the-clock support.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index-18.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-ssl.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Web Hosting 2</span>
+                                        <span class="contain-sub-1__description">
+                                                fast, secure, dependable, with round-the-clock support.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item contain-sub-1">
+                            <a class="nav-link fw-medium" href="#">
+                                Hosting
+                            </a>
+                            <ul class="contain-sub-1__content contain-sub-1__content-xl list-unstyled">
+                                <li>
+                                    <a href="wp-hosting.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-wp-hosting.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span
+                                                class="contain-sub-1__title d-flex align-items-center justify-content-between gap-2">
+                                                <span class="d-inline-block">
+                                                    WordPress Hosting
+                                                </span>
+                                        <span
+                                                    class="flex-shrink-0 badge bg-primary-subtle text-primary-emphasis fw-bold py-1">
+                                                    New
+                                                </span>
+                                        </span>
+                                        <span class="contain-sub-1__description">
+                                                WordPress hosting built for
+                                                performance and managed
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="shared-hosting.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-shared-hosting.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Shared Hosting</span>
+                                        <span class="contain-sub-1__description">
+                                                Shared hosting is a type of web
+                                                hosting a single physical
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="reseller-hosting.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-reseller-hosting.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Reseller Hosting</span>
+                                        <span class="contain-sub-1__description">
+                                                Reseller hosting is a type of web
+                                                hosting a single physical
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="hospedagem-cpanel.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-cpanel-hosting.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Hospedagem cPanel</span>
+                                        <span class="contain-sub-1__description">
+                                                cPanel hosting is a type of web
+                                                hosting a single physical
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="web-hosting.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-web-hosting.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Web Hosting</span>
+                                        <span class="contain-sub-1__description">
+                                                Web hosting is a type of web
+                                                hosting a single physical
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="ecommerce-hosting.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-shared-hosting.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Ecommerce Hosting</span>
+                                        <span class="contain-sub-1__description">
+                                                Ecommerce hosting is a type of web
+                                                hosting a single physical
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="cloud-hosting.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-cloud-server.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Cloud Hosting</span>
+                                        <span class="contain-sub-1__description">
+                                                virtual servers running in a cloud computing environment
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="email-hosting.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-email.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Email Hosting</span>
+                                        <span class="contain-sub-1__description">
+                                                virtual servers running in a cloud computing environment
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item contain-sub-1">
+                            <a class="nav-link fw-medium" href="#">
+                                Servers
+                            </a>
+                            <ul class="contain-sub-1__content list-unstyled">
+                                <li>
+                                    <a href="vps-server.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-vps-server.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">VPS Server</span>
+                                        <span class="contain-sub-1__description">
+                                                Virtual machine that provides virtualized server resources
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="game-server.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-game-server.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Game Server</span>
+                                        <span class="contain-sub-1__description">
+                                                virtual servers running in a cloud computing environment
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="dedicated-server.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-dedicated-server.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Dedicated Server</span>
+                                        <span class="contain-sub-1__description">
+                                                virtual servers running in a cloud computing environment
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="index-13.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-dedicated-server.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">Dedicated Virtual Server</span>
+                                        <span class="contain-sub-1__description">
+                                                virtual servers running in a cloud computing environment
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item contain-mega-menu">
+                            <a class="nav-link fw-medium" href="#">
+                                Domain
+                            </a>
+                            <div class="contain-mega-menu__content">
+                                <div class="container p-0">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-xl-7">
+                                            <div class="h-100 pt-32 pb-32 px-6">
+                                                <span class="h6 d-block fs-18">Domain</span>
+                                                <div class="row g-0 gx-md-5">
+                                                    <div class="col-md-6">
+                                                        <ul class="contain-mega-menu__list list-unstyled">
+                                                            <li>
+                                                                <a href="domain-page.html" class="contain-mega-menu__link text-decoration-none d-flex align-items-start gap-2">
+                                                                    <span class="contain-mega-menu__img">
+                                                                        <img src="assets/img/icon-menu-search-domain.png"
+                                                                            alt="image" class="img-fluid">
+                                                                    </span>
+                                                                    <span class="flex-grow-1">
+                                                                        <span class="contain-mega-menu__title d-flex">
+                                                                            Search Domain Name
+                                                                        </span>
+                                                                    <span class="contain-mega-menu__description">
+                                                                            WordPress hosting is a specialized
+                                                                            service tailored to the needs
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="transfer-domain.html" class="contain-mega-menu__link text-decoration-none d-flex align-items-start gap-2">
+                                                                    <span class="contain-mega-menu__img">
+                                                                        <img src="assets/img/icon-menu-transfer-domain.png"
+                                                                            alt="image" class="img-fluid">
+                                                                    </span>
+                                                                    <span class="flex-grow-1">
+                                                                        <span
+                                                                            class="contain-mega-menu__title d-flex align-items-center justify-content-between gap-2">
+                                                                            <span class="d-inline-block">
+                                                                                Transfer Domain Names
+                                                                            </span>
+                                                                    <span
+                                                                                class="flex-shrink-0 badge bg-danger-subtle text-danger-emphasis fw-bold py-1">
+                                                                                Hot
+                                                                            </span>
+                                                                    </span>
+                                                                    <span class="contain-mega-menu__description">
+                                                                            Powerful web hosting with free
+                                                                            SSL and backups included.
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <ul class="contain-mega-menu__list list-unstyled">
+                                                            <li>
+                                                                <a href="domain-registration.html" class="contain-mega-menu__link text-decoration-none d-flex align-items-start gap-2">
+                                                                    <span class="contain-mega-menu__img">
+                                                                        <img src="assets/img/icon-menu-domain-reg.png"
+                                                                            alt="image" class="img-fluid">
+                                                                    </span>
+                                                                    <span class="flex-grow-1">
+                                                                        <span class="contain-mega-menu__title d-flex">
+                                                                            Domain Registration
+                                                                        </span>
+                                                                    <span class="contain-mega-menu__description">
+                                                                            Dedicated hosting is premium web hosting
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="transfer-domain-search.html" class="contain-mega-menu__link text-decoration-none d-flex align-items-start gap-2">
+                                                                    <span class="contain-mega-menu__img">
+                                                                        <img src="assets/img/icon-menu-ssl.png"
+                                                                            alt="image" class="img-fluid">
+                                                                    </span>
+                                                                    <span class="flex-grow-1">
+                                                                        <span class="contain-mega-menu__title d-flex">
+                                                                            Transfer Domain Search
+                                                                        </span>
+                                                                    <span class="contain-mega-menu__description">
+                                                                            Dedicated hosting is premium web hosting
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-5">
+                                            <div class="h-100 p-6">
+                                                <div class="row g-2 bg-primary bg-opacity-5 p-4 p-xl-8 rounded">
+                                                    <div class="col-xl-6">
+                                                        <span class="d-block h5 mb-4">
+                                                            Buy a Domain
+                                                            You Want
+                                                        </span>
+                                                        <div class="d-flex align-items-center gap-2 mb-4">
+                                                            <div class="w-4 h-4 bg-success flex-shrink-0 bg-opacity-75 rounded-circle fs-10 lh-1 text-white d-flex align-items-center justify-content-center">
+                                                                <i class="las la-check"></i>
+                                                            </div>
+                                                            <small class="fw-medium">Up to 32 Cores</small>
+                                                        </div>
+                                                        <a href="domain-registration.html" class="btn btn-sm btn-primary">
+                                                            Explore Now
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-xl-6 d-none d-xl-block">
+                                                        <img src="assets/img/mega-menu-img-1.png" alt="image" class="img-fluid">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item contain-sub-1">
+                            <a class="nav-link fw-medium" href="#">
+                                Company
+                            </a>
+                            <ul class="contain-sub-1__content list-unstyled">
+                                <li>
+                                    <a href="about-us.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-about.png" alt="image" class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">
+                                                About Company
+                                            </span>
+                                        <span class="contain-sub-1__description">
+                                                WordPress hosting is a specialized
+                                                service tailored
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="contact.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-game-server.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="contain-sub-1__title d-flex">
+                                                Contact Page
+                                            </span>
+                                        <span class="contain-sub-1__description">
+                                                Dedicated hosting is premium web hosting
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="blog.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-vps-hosting.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span
+                                                class="contain-sub-1__title d-flex align-items-center justify-content-between gap-2">
+                                                <span class="d-inline-block">
+                                                    Blog
+                                                </span>
+                                        </span>
+                                        <span class="contain-sub-1__description">
+                                                Powerful web hosting with free
+                                                SSL and backups included.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="blog-listing.html" class="contain-sub-1__link text-decoration-none d-flex align-items-start gap-2">
+                                        <span class="contain-sub-1__img">
+                                            <img src="assets/img/icon-menu-pricing-icon.png" alt="image"
+                                                class="img-fluid">
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span
+                                                class="contain-sub-1__title d-flex align-items-center justify-content-between gap-2">
+                                                <span class="d-inline-block">
+                                                    Blog Listing
+                                                </span>
+                                        </span>
+                                        <span class="contain-sub-1__description">
+                                                Powerful web hosting with free
+                                                SSL and backups included.
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item contain-mega-menu">
+                            <a class="nav-link fw-medium" href="#">
+                                Feature
+                            </a>
+                            <div class="contain-mega-menu__content">
+                                <div class="container p-0">
+                                    <div class="row g-0 align-items-center">
+                                        <div class="col-xl-7">
+                                            <div class="h-100 pt-32 pb-32 px-6">
+                                                <span class="h6 d-block fs-18">Feature</span>
+                                                <div class="row g-0 gx-md-5">
+                                                    <div class="col-md-6">
+                                                        <ul class="contain-mega-menu__list list-unstyled">
+                                                            <li>
+                                                                <a href="ddos.html" class="contain-mega-menu__link text-decoration-none d-flex align-items-start gap-2">
+                                                                    <span class="contain-mega-menu__img">
+                                                                        <img src="assets/img/icon-menu-ddos.png"
+                                                                            alt="image" class="img-fluid">
+                                                                    </span>
+                                                                    <span class="flex-grow-1">
+                                                                        <span class="contain-mega-menu__title d-flex">
+                                                                            DDos Protection
+                                                                        </span>
+                                                                    <span class="contain-mega-menu__description">
+                                                                            WordPress hosting is a specialized
+                                                                            service tailored to the needs
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="operating-system.html" class="contain-mega-menu__link text-decoration-none d-flex align-items-start gap-2">
+                                                                    <span class="contain-mega-menu__img">
+                                                                        <img src="assets/img/icon-menu-os.png"
+                                                                            alt="image" class="img-fluid">
+                                                                    </span>
+                                                                    <span class="flex-grow-1">
+                                                                        <span
+                                                                            class="contain-mega-menu__title d-flex align-items-center justify-content-between gap-2">
+                                                                            <span class="d-inline-block">
+                                                                                Operating System
+                                                                            </span>
+                                                                    </span>
+                                                                    <span class="contain-mega-menu__description">
+                                                                            Powerful web hosting with free
+                                                                            SSL and backups included.
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="premium-network.html" class="contain-mega-menu__link text-decoration-none d-flex align-items-start gap-2">
+                                                                    <span class="contain-mega-menu__img">
+                                                                        <img src="assets/img/icon-menu-transfer-domain.png"
+                                                                            alt="image" class="img-fluid">
+                                                                    </span>
+                                                                    <span class="flex-grow-1">
+                                                                        <span
+                                                                            class="contain-mega-menu__title d-flex align-items-center justify-content-between gap-2">
+                                                                            <span class="d-inline-block">
+                                                                                Premium Network
+                                                                            </span>
+                                                                    </span>
+                                                                    <span class="contain-mega-menu__description">
+                                                                            Powerful web hosting with free
+                                                                            SSL and backups included.
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="ssl-page.html" class="contain-mega-menu__link text-decoration-none d-flex align-items-start gap-2">
+                                                                    <span class="contain-mega-menu__img">
+                                                                        <img src="assets/img/icon-menu-ssl.png"
+                                                                            alt="image" class="img-fluid">
+                                                                    </span>
+                                                                    <span class="flex-grow-1">
+                                                                        <span
+                                                                            class="contain-mega-menu__title d-flex align-items-center justify-content-between gap-2">
+                                                                            <span class="d-inline-block">
+                                                                                SSl Security
+                                                                            </span>
+                                                                    </span>
+                                                                    <span class="contain-mega-menu__description">
+                                                                            Powerful web hosting with free
+                                                                            SSL and backups included.
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <ul class="contain-mega-menu__list list-unstyled">
+                                                            <li>
+                                                                <a href="server-page.html" class="contain-mega-menu__link text-decoration-none d-flex align-items-start gap-2">
+                                                                    <span class="contain-mega-menu__img">
+                                                                        <img src="assets/img/icon-menu-domain-reg.png"
+                                                                            alt="image" class="img-fluid">
+                                                                    </span>
+                                                                    <span class="flex-grow-1">
+                                                                        <span class="contain-mega-menu__title d-flex">
+                                                                            Server Location
+                                                                        </span>
+                                                                    <span class="contain-mega-menu__description">
+                                                                            Dedicated hosting is premium web hosting
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="control-panel.html" class="contain-mega-menu__link text-decoration-none d-flex align-items-start gap-2">
+                                                                    <span class="contain-mega-menu__img">
+                                                                        <img src="assets/img/icon-menu-control-panel.png"
+                                                                            alt="image" class="img-fluid">
+                                                                    </span>
+                                                                    <span class="flex-grow-1">
+                                                                        <span class="contain-mega-menu__title d-flex">
+                                                                            Control Panel
+                                                                        </span>
+                                                                    <span class="contain-mega-menu__description">
+                                                                            Dedicated hosting is premium web hosting
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="support-page.html" class="contain-mega-menu__link text-decoration-none d-flex align-items-start gap-2">
+                                                                    <span class="contain-mega-menu__img">
+                                                                        <img src="assets/img/icon-menu-supprot.png"
+                                                                            alt="image" class="img-fluid">
+                                                                    </span>
+                                                                    <span class="flex-grow-1">
+                                                                        <span class="contain-mega-menu__title d-flex">
+                                                                            Support
+                                                                        </span>
+                                                                    <span class="contain-mega-menu__description">
+                                                                            Dedicated hosting is premium web hosting
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="security.html" class="contain-mega-menu__link text-decoration-none d-flex align-items-start gap-2">
+                                                                    <span class="contain-mega-menu__img">
+                                                                        <img src="assets/img/icon-menu-security.png"
+                                                                            alt="image" class="img-fluid">
+                                                                    </span>
+                                                                    <span class="flex-grow-1">
+                                                                        <span class="contain-mega-menu__title d-flex">
+                                                                            Security & Technology
+                                                                        </span>
+                                                                    <span class="contain-mega-menu__description">
+                                                                            Dedicated hosting is premium web hosting
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-5">
+                                            <div class="h-100 p-6">
+                                                <div class="row g-2 bg-primary bg-opacity-5 p-4 p-xl-8 rounded">
+                                                    <div class="col-xl-6">
+                                                        <span class="d-block h5 mb-4">
+                                                            Buy a Domain
+                                                            You Want
+                                                        </span>
+                                                        <div class="d-flex align-items-center gap-2 mb-4">
+                                                            <div class="w-4 h-4 bg-success flex-shrink-0 bg-opacity-75 rounded-circle fs-10 lh-1 text-white d-flex align-items-center justify-content-center">
+                                                                <i class="las la-check"></i>
+                                                            </div>
+                                                            <small class="fw-medium">Up to 32 Cores</small>
+                                                        </div>
+                                                        <a href="domain-registration.html" class="btn btn-sm btn-primary">
+                                                            Explore Now
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-xl-6 d-none d-xl-block">
+                                                        <img src="assets/img/mega-menu-img-1.png" alt="image" class="img-fluid">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-medium" href="price.html">
+                                Pricing
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="contact.html" class="link btn btn-sm btn-dark hover:bg-dark hover:border-dark fw-medium rounded-pill">
+                                Get Started
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- /Primary Header -->
+    </div><!-- /Header -->
+
+    <!-- Banner  -->
+    <section class="banner banner-security bg-dark control-panel-banner">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 col-xl-6">
+                    <span class="fs-18 fw-semibold text-primary mb-2" data-sal="slide-up" data-sal-duration="1500"
+                        data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                        Hospedagem cPanel
+                    </span>
+                    <h1 class="text-white mb-4" data-sal="slide-up" data-sal-duration="1000" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                        Hospedagem cPanel.
+                    </h1>
+                    <p class="mb-8 text-white max-text-72 text-opacity-75" data-sal="slide-up" data-sal-duration="1500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                        A qualidade que você precisa com todo o potencial para ganhar
+                    </p>
+                    <div class="d-flex align-items-center gap-5 flex-wrap" data-sal="slide-up" data-sal-duration="1000" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                        <a href="#" class="btn btn-primary btn-arrow btn-arrow btn-arrow-md btn-lg fs-14 fw-medium rounded">
+                            <span class="btn-arrow__text">
+                                Começar
+                                <span class="btn-arrow__icon">
+                                    <i class="las la-arrow-right"></i>
+                                </span>
+                            </span>
+                        </a>
+                        <h4 class="text-white mb-0">R$20,00 <span class="fw-normal fs-16">/mês</span></h4>
+                    </div>
+                    <span class="d-block fs-14 text-white text-opacity-75 mt-2" data-sal="slide-up" data-sal-duration="1500"
+                        data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                        Sem preocupações - 45 dias de devolução de dinheiro
+                    </span>
+                </div>
+                <div class="col-lg-5 col-xl-6 text-lg-end">
+                    <img src="assets/img/cpanel-img.png" alt="image" class="img-fluid" data-sal="fade" data-sal-duration="1500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Banner  -->
+
+    <!-- Price  -->
+    <section class="location-tab pb-120 position-relative z-1">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="d-flex justify-content-center border-bottom border-light border-opacity-10" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                        <div class="pricing-nav-pills d-inline-block mx-auto overflow-x-auto">
+                            <ul class="nav nav-pills flex-nowrap gap-3 gap-sm-0" role="tablist">
+                                <li class="nav-item flex-shrink-0" role="presentation">
+                                    <a class="partner-tab-nev d-inline-block text-decoration-none text-white fw-bold px-3 pb-2 active" href="#" data-bs-toggle="pill" data-bs-target="#storageOpt" aria-selected="true" role="tab">
+                                        Armazenamento otimizado
+                                    </a>
+                                </li>
+                                <li class="nav-item flex-shrink-0" role="presentation">
+                                    <a class="partner-tab-nev d-inline-block text-decoration-none text-white fw-bold px-3 pb-2" href="#" data-bs-toggle="pill" data-bs-target="#accountOpt" aria-selected="true" role="tab">
+                                        Contas otimizadas
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="tab-content" data-sal="fade" data-sal-duration="1000" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                        <div class="tab-pane fade show active" id="storageOpt" role="tabpanel">
+                            <div class="row g-4">
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card border-0">
+                                        <div class="card-body price-card-item-one position-relative overflow-hidden px-xl-7 py-xl-9">
+                                            <h6 class="mb-1">SSL Starter</h6>
+                                            <small>Our most affordable, single domain,
+                                                WordPress Hosting plan.</small>
+                                            <div class="mt-5">
+                                                <div class="monthly-price">
+                                                    <h4>$30.99</h4>
+                                                    <small class="fw-bold">Normally $99.99</small>
+                                                </div>
+                                                <div class="yearly-price">
+                                                    <h4>$299.00</h4>
+                                                    <small class="fw-bold">Normally $24.91</small>
+                                                </div>
+                                            </div>
+                                            <div class="monthly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+                                            <div class="yearly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+
+                                            <div class="mt-6">
+                                                <h6 class="mb-5">Top Featured</h6>
+                                                <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Standard  <span class="fw-bold">Performance</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 <span class="fw-bold">Websites</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold">Bandwidth</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold"> Free SSL</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Warranty <span class="fw-bold"> 10,000</span></small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card border-0">
+                                        <div class="card-body price-card-item-one position-relative overflow-hidden px-xl-7 py-xl-9">
+                                            <h6 class="mb-1">SSL Silver</h6>
+                                            <small>Our most affordable, single domain,
+                                                WordPress Hosting plan.</small>
+                                            <div class="mt-5">
+                                                <div class="monthly-price">
+                                                    <h4>$30.99</h4>
+                                                    <small class="fw-bold">Normally $99.99</small>
+                                                </div>
+                                                <div class="yearly-price">
+                                                    <h4>$299.00</h4>
+                                                    <small class="fw-bold">Normally $24.91</small>
+                                                </div>
+                                            </div>
+                                            <div class="monthly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+                                            <div class="yearly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+                                            <div class="mt-6">
+                                                <h6 class="mb-5">Top Featured</h6>
+                                                <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Standard  <span class="fw-bold">Performance</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 <span class="fw-bold">Websites</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold">Bandwidth</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold"> Free SSL</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Warranty <span class="fw-bold"> 10,000</span></small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card border-0">
+                                        <div class="card-body price-card-item-one position-relative overflow-hidden px-xl-7 py-xl-9">
+                                            <div class="discount-badge gradient-bg">
+                                                <p class="text-white fw-bold mb-0">30% Sale</p>
+                                            </div>
+                                            <h6 class="mb-1">SSL Gold</h6>
+                                            <small>Our most affordable, single domain,
+                                                WordPress Hosting plan.</small>
+                                            <div class="mt-5">
+                                                <div class="monthly-price">
+                                                    <h4>$30.99</h4>
+                                                    <small class="fw-bold">Normally $99.99</small>
+                                                </div>
+                                                <div class="yearly-price">
+                                                    <h4>$299.00</h4>
+                                                    <small class="fw-bold">Normally $24.91</small>
+                                                </div>
+                                            </div>
+                                            <div class="monthly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+                                            <div class="yearly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+                                            <div class="mt-6">
+                                                <h6 class="mb-5">Top Featured</h6>
+                                                <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Standard  <span class="fw-bold">Performance</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 <span class="fw-bold">Websites</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold">Bandwidth</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold"> Free SSL</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Warranty <span class="fw-bold"> 10,000</span></small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card border-0">
+                                        <div class="card-body price-card-item-one position-relative overflow-hidden px-xl-7 py-xl-9">
+                                            <h6 class="mb-1">SSL Diamond</h6>
+                                            <small>Our most affordable, single domain,
+                                                WordPress Hosting plan.</small>
+                                            <div class="mt-5">
+                                                <div class="monthly-price">
+                                                    <h4>$30.99</h4>
+                                                    <small class="fw-bold">Normally $99.99</small>
+                                                </div>
+                                                <div class="yearly-price">
+                                                    <h4>$299.00</h4>
+                                                    <small class="fw-bold">Normally $24.91</small>
+                                                </div>
+                                            </div>
+                                            <div class="monthly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+                                            <div class="yearly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$5.99/mo when you renew</small>
+                                            </div>
+                                            <div class="mt-6">
+                                                <h6 class="mb-5">Top Featured</h6>
+                                                <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Standard  <span class="fw-bold">Performance</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 <span class="fw-bold">Websites</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold">Bandwidth</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold"> Free SSL</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Warranty <span class="fw-bold"> 10,000</span></small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="accountOpt" role="tabpanel">
+                            <div class="row g-4">
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card border-0">
+                                        <div class="card-body price-card-item-one position-relative overflow-hidden px-xl-7 py-xl-9">
+                                            <h6 class="mb-1">SSL Starter</h6>
+                                            <small>Our most affordable, single domain,
+                                                WordPress Hosting plan.</small>
+                                            <div class="mt-5">
+                                                <div class="monthly-price">
+                                                    <h4>$30.99</h4>
+                                                    <small class="fw-bold">Normally $99.99</small>
+                                                </div>
+                                                <div class="yearly-price">
+                                                    <h4>$299.00</h4>
+                                                    <small class="fw-bold">Normally $24.91</small>
+                                                </div>
+                                            </div>
+                                            <div class="monthly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+                                            <div class="yearly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+
+                                            <div class="mt-6">
+                                                <h6 class="mb-5">Top Featured</h6>
+                                                <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Standard  <span class="fw-bold">Performance</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 <span class="fw-bold">Websites</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold">Bandwidth</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold"> Free SSL</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Warranty <span class="fw-bold"> 10,000</span></small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card border-0">
+                                        <div class="card-body price-card-item-one position-relative overflow-hidden px-xl-7 py-xl-9">
+                                            <h6 class="mb-1">SSL Silver</h6>
+                                            <small>Our most affordable, single domain,
+                                                WordPress Hosting plan.</small>
+                                            <div class="mt-5">
+                                                <div class="monthly-price">
+                                                    <h4>$30.99</h4>
+                                                    <small class="fw-bold">Normally $99.99</small>
+                                                </div>
+                                                <div class="yearly-price">
+                                                    <h4>$299.00</h4>
+                                                    <small class="fw-bold">Normally $24.91</small>
+                                                </div>
+                                            </div>
+                                            <div class="monthly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+                                            <div class="yearly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+                                            <div class="mt-6">
+                                                <h6 class="mb-5">Top Featured</h6>
+                                                <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Standard  <span class="fw-bold">Performance</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 <span class="fw-bold">Websites</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold">Bandwidth</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold"> Free SSL</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Warranty <span class="fw-bold"> 10,000</span></small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card border-0">
+                                        <div class="card-body price-card-item-one position-relative overflow-hidden px-xl-7 py-xl-9">
+                                            <div class="discount-badge gradient-bg">
+                                                <p class="text-white fw-bold mb-0">30% Sale</p>
+                                            </div>
+                                            <h6 class="mb-1">SSL Gold</h6>
+                                            <small>Our most affordable, single domain,
+                                                WordPress Hosting plan.</small>
+                                            <div class="mt-5">
+                                                <div class="monthly-price">
+                                                    <h4>$30.99</h4>
+                                                    <small class="fw-bold">Normally $99.99</small>
+                                                </div>
+                                                <div class="yearly-price">
+                                                    <h4>$299.00</h4>
+                                                    <small class="fw-bold">Normally $24.91</small>
+                                                </div>
+                                            </div>
+                                            <div class="monthly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+                                            <div class="yearly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+                                            <div class="mt-6">
+                                                <h6 class="mb-5">Top Featured</h6>
+                                                <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Standard  <span class="fw-bold">Performance</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 <span class="fw-bold">Websites</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold">Bandwidth</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold"> Free SSL</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Warranty <span class="fw-bold"> 10,000</span></small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card border-0">
+                                        <div class="card-body price-card-item-one position-relative overflow-hidden px-xl-7 py-xl-9">
+                                            <h6 class="mb-1">SSL Diamond</h6>
+                                            <small>Our most affordable, single domain,
+                                                WordPress Hosting plan.</small>
+                                            <div class="mt-5">
+                                                <div class="monthly-price">
+                                                    <h4>$30.99</h4>
+                                                    <small class="fw-bold">Normally $99.99</small>
+                                                </div>
+                                                <div class="yearly-price">
+                                                    <h4>$299.00</h4>
+                                                    <small class="fw-bold">Normally $24.91</small>
+                                                </div>
+                                            </div>
+                                            <div class="monthly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$7.99/mo when you renew</small>
+                                            </div>
+                                            <div class="yearly-price">
+                                                <a class="btn btn-dark btn-arrow btn-lg w-100 fs-14 fw-bolder rounded mt-6" href="#">
+                                                    <span class="btn-arrow__text">
+                                                        Add to Cart
+                                                        <span class="btn-arrow__icon">
+                                                            <i class="las la-arrow-right"></i>
+                                                        </span>
+                                                    </span>
+                                                </a>
+                                                <small class="d-block fw-medium mt-2">$5.99/mo when you renew</small>
+                                            </div>
+                                            <div class="mt-6">
+                                                <h6 class="mb-5">Top Featured</h6>
+                                                <ul class="list-unstyled d-flex flex-column gap-3 mb-0">
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Standard  <span class="fw-bold">Performance</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 <span class="fw-bold">Websites</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>100 GB <span class="fw-bold">SSD Storage</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold">Bandwidth</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Unlimited <span class="fw-bold"> Free SSL</span></small>
+                                                    </li>
+                                                    <li class="d-flex align-items-center gap-3">
+                                                        <div class="w-4 h-4 bg-success rounded-circle fs-12 text-white d-flex align-items-center justify-content-center">
+                                                            <i class="las la-check"></i>
+                                                        </div>
+                                                        <small>Warranty <span class="fw-bold"> 10,000</span></small>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pt-40">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4" data-sal="slide-up" data-sal-duration="400" data-sal-delay="100" data-sal-easing="ease-in-out-sine">
+                        <h6>Free Setup & Installation*</h6>
+                        <p>Need help? We will set up and install your SSL
+                            certificate free of charge!*</p>
+                    </div>
+                    <div class="col-lg-4" data-sal="slide-up" data-sal-duration="450" data-sal-delay="150" data-sal-easing="ease-in-out-sine">
+                        <h6>Best in Class Encryption</h6>
+                        <p>Need help? We will set up and install your SSL
+                            certificate free of charge!*</p>
+                    </div>
+                    <div class="col-lg-4" data-sal="slide-up" data-sal-duration="500" data-sal-delay="200" data-sal-easing="ease-in-out-sine">
+                        <h6>24x7 Support</h6>
+                        <p>Need help? We will set up and install your SSL
+                            certificate free of charge!*</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Price  -->
+
+    <div class="pt-120 pb-120 bg-primary bg-opacity-5">
+        <div class="pb-60">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-6">
+                        <span class="d-inline-block fs-18 fw-semibold text-primary mb-2" data-sal="slide-up"
+                            data-sal-duration="1500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                            Recursos
+                        </span>
+                        <h2 class="mb-8" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                            A melhor plataforma de hospedagem cPanel
+                        </h2>
+                        <p class="mb-8" data-sal="slide-up" data-sal-duration="1000" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                            A hospedagem cPanel permite que você ganhe dinheiro ao se tornar sua própria empresa de hospedagem web. Você estará no controle de todos os aspectos de seu negócio e nós ficaremos atrás do pano de fundo. Você receberá todos os benefícios e nós faremos todo o trabalho. Você pode agradecer-nos mais tarde!
+                        </p>
+                        <a href="price.html" class="btn btn-primary btn-arrow btn-arrow btn-arrow-md btn-lg fs-14 fw-medium rounded" data-sal="slide-up" data-sal-duration="1000" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                            <span class="btn-arrow__text">
+                                Planos
+                                <span class="btn-arrow__icon">
+                                    <i class="las la-arrow-right"></i>
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="text-center">
+                            <img src="assets/img/cpanel-img-1.png" alt="image" class="img-fluid" data-sal="fade" data-sal-duration="1500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                    <div class="card border-0 shadow-sm rounded-4 h-100">
+                        <div class="card-body p-md-6 p-xl-8">
+                            <div class="mb-8">
+                                <img src="assets/img/icon-feat-1.png" alt="image" class="img-fluid">
+                            </div>
+                            <h6 class="mb-4">
+                                Nameservers privados
+                            </h6>
+                            <p class="mb-0">
+                                Use seus próprios nameservers privados e personalizados para permanecer anônimo e parecer que você é o chefe!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-sal="slide-up" data-sal-duration="500" data-sal-delay="400" data-sal-easing="ease-in-out-sine">
+                    <div class="card border-0 shadow-sm rounded-4 h-100">
+                        <div class="card-body p-md-6 p-xl-8">
+                            <div class="mb-8">
+                                <img src="assets/img/icon-feat-2.png" alt="image" class="img-fluid">
+                            </div>
+                            <h6 class="mb-4">
+                                Software de faturamento gratuito
+                            </h6>
+                            <p class="mb-0">
+                                Automatize seu negócio de hospedagem web com WHMCS ou Blesta. Comece rapidamente sem habilidades de programação necessárias.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-sal="slide-up" data-sal-duration="500" data-sal-delay="500" data-sal-easing="ease-in-out-sine">
+                    <div class="card border-0 shadow-sm rounded-4 h-100">
+                        <div class="card-body p-md-6 p-xl-8">
+                            <div class="mb-8">
+                                <img src="assets/img/icon-feat-3.png" alt="image" class="img-fluid">
+                            </div>
+                            <h6 class="mb-4">
+                                100% com rótulo branco
+                            </h6>
+                            <p class="mb-0">
+                                Ofereça hospedagem sob seu próprio nome de marca, mas deixe-nos lidar com toda a manutenção e gerenciamento do servidor.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-sal="slide-up" data-sal-duration="1000" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                    <div class="card border-0 shadow-sm rounded-4 h-100">
+                        <div class="card-body p-md-6 p-xl-8">
+                            <div class="mb-8">
+                                <img src="assets/img/icon-feat-4.png" alt="image" class="img-fluid">
+                            </div>
+                            <h6 class="mb-4">
+                                Infraestrutura em nuvem
+                            </h6>
+                            <p class="mb-0">
+                                Rápido, confiável e seguro. Nossos planos de hospedagem em nuvem são ótimos para empresas de todos os tamanhos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-sal="slide-up" data-sal-duration="1000" data-sal-delay="400" data-sal-easing="ease-in-out-sine">
+                    <div class="card border-0 shadow-sm rounded-4 h-100">
+                        <div class="card-body p-md-6 p-xl-8">
+                            <div class="mb-8">
+                                <img src="assets/img/icon-feat-5.png" alt="image" class="img-fluid">
+                            </div>
+                            <h6 class="mb-4">
+                                Gerenciamento de WordPress sem esforço
+                            </h6>
+                            <p class="mb-0">
+                                Rápido, confiável e seguro. Nossos planos de hospedagem em nuvem são ótimos para empresas de todos os tamanhos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-sal="slide-up" data-sal-duration="1000" data-sal-delay="500" data-sal-easing="ease-in-out-sine">
+                    <div class="card border-0 shadow-sm rounded-4 h-100">
+                        <div class="card-body p-md-6 p-xl-8">
+                            <div class="mb-8">
+                                <img src="assets/img/icon-feat-6.png" alt="image" class="img-fluid">
+                            </div>
+                            <h6 class="mb-4">
+                                Serviço de email confiável
+                            </h6>
+                            <p class="mb-0">
+                                Rápido, confiável e seguro. Nossos planos de hospedagem em nuvem são ótimos para empresas de todos os tamanhos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pt-60 pb-60">
+        <div class="pt-60 pb-60">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="ps-lg-8 pe-xxl-12">
+                            <span class="d-block mb-2 text-primary fs-18 fw-semibold" data-sal="slide-up"
+                                data-sal-duration="1500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                                Sem aumento de latência
+                            </span>
+                            <h3 class="mb-6" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                                Controle as contas dos clientes via painel WHM
+                            </h3>
+                            <p data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                                A velocidade de carregamento de cada site é sem dúvida um dos principais fatores de ranking SEO hoje. Com isso em mente, nós otimizamos meticulosamente
+                            </p>
+                            <p class="mb-0" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                                Nossos planos de hospedagem web para atender aos requisitos de velocidade de carregamento de cada site de forma pré-configurada. Claro, isso não é sempre otimizado devido à otimização de cada site que hospedamos.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                        <img src="assets/img/cpanel-img-2.png" alt="image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pb-60">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-6" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                        <img src="assets/img/cpanel-img-3.png" alt="image" class="img-fluid">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="ps-lg-8 pe-xxl-12">
+                            <span class="d-block mb-2 text-primary fs-18 fw-semibold" data-sal="slide-up"
+                                data-sal-duration="1500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                                Gerenciamento de hospedagem poderoso
+                            </span>
+                            <h3 class="mb-6" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                                Ferramentas avançadas de gerenciamento de hospedagem via painel cPanel
+                            </h3>
+                            <p data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                                A velocidade de carregamento de cada site é sem dúvida um dos principais fatores de ranking SEO hoje. Com isso em mente, nós otimizamos meticulosamente
+                            </p>
+                            <p class="mb-0" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                                Nossos planos de hospedagem web para atender aos requisitos de velocidade de carregamento de cada site de forma pré-configurada. Claro, isso não é sempre otimizado devido à otimização de cada site que hospedamos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pb-60">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="ps-lg-8 pe-xxl-12">
+                            <span class="d-block mb-2 text-primary fs-18 fw-semibold" data-sal="slide-up"
+                                data-sal-duration="1500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                                24/7 Suporte Técnico
+                            </span>
+                            <h3 class="mb-6" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                                Nosso time técnico está aqui para ajudar você 24/7!
+                            </h3>
+                            <p data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                                A velocidade de carregamento de cada site é sem dúvida um dos principais fatores de ranking SEO hoje. Com isso em mente, nós otimizamos meticulosamente
+                            </p>
+                            <p class="mb-8" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                                Nossos planos de hospedagem web para atender aos requisitos de velocidade de carregamento de cada site de forma pré-configurada. Claro, isso não é sempre otimizado devido à otimização de cada site que hospedamos.
+                            </p>
+                            <a href="price.html" class="btn btn-primary btn-arrow btn-lg fs-14 fw-medium rounded">
+                                <span class="btn-arrow__text">
+                                    Começar Agora
+                                    <span class="btn-arrow__icon">
+                                        <i class="las la-arrow-right"></i>
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                        <img src="assets/img/cpanel-img-4.png" alt="image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pt-120 pb-120 bg-primary bg-opacity-5">
+        <div class="container">
+            <div class="row align-items-center g-4">
+                <div class="col-xxl-5" data-sal="slide-up" data-sal-duration="1000" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                    <h2 class="h3 mb-3">
+                        Por que comprar domínios na GouTec?
+                    </h2>
+                    <p class="mb-8 max-text-48">
+                        Compre um plano de hospedagem de 36 meses e obtenha um domínio gratuito por um ano. Você pode obter nomes de domínio genéricos populares de nível superior como .com, .net, .org e outras extensões gratuitamente.
+                    </p>
+                    <a href="price.html" class="btn btn-primary btn-arrow btn-arrow-lg btn-lg fs-14 fw-semibold rounded transition">
+                        <span class="btn-arrow__text">
+                            Ver Preços
+                            <span class="btn-arrow__icon">
+                                <i class="las la-arrow-right"></i>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+                <div class="col-xxl-7">
+                    <div class="row g-4">
+                        <div class="col-md-6" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                            <div class="card hover-shadow rounded-3 border border-secondary transition">
+                                <div class="card-body p-xl-6">
+                                    <div class="mb-4">
+                                        <img src="assets/img/domain-icon-1.png" alt="icon" class="img-fluid">
+                                    </div>
+                                    <h6 class="mb-4">
+                                        Bloqueio de domínio
+                                    </h6>
+                                    <p class="mb-0">Oferecemos um grande número de extensões de domínio suportadas, podemos atender à demanda de cada cliente com preços competitivos!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                            <div class="card hover-shadow rounded-3 border border-secondary transition">
+                                <div class="card-body p-xl-6">
+                                    <div class="mb-4">
+                                        <img src="assets/img/domain-icon-2.png" alt="icon" class="img-fluid">
+                                    </div>
+                                    <h6 class="mb-4">
+                                        Taxas de renovação excelentes
+                                    </h6>
+                                    <p class="mb-0">Oferecemos um grande número de extensões de domínio suportadas, podemos atender à demanda de cada cliente com preços competitivos!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                            <div class="card hover-shadow rounded-3 border border-secondary transition">
+                                <div class="card-body p-xl-6">
+                                    <div class="mb-4">
+                                        <img src="assets/img/domain-icon-3.png" alt="icon" class="img-fluid">
+                                    </div>
+                                    <h6 class="mb-4">
+                                        Preços baixos e grande seleção
+                                    </h6>
+                                    <p class="mb-0">Oferecemos um grande número de extensões de domínio suportadas, podemos atender à demanda de cada cliente com preços competitivos!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                            <div class="card hover-shadow rounded-3 border border-secondary transition">
+                                <div class="card-body p-xl-6">
+                                    <div class="mb-4">
+                                        <img src="assets/img/domain-icon-1.png" alt="icon" class="img-fluid">
+                                    </div>
+                                    <h6 class="mb-4">
+                                        Gerenciamento fácil
+                                    </h6>
+                                    <p class="mb-0">Oferecemos um grande número de extensões de domínio suportadas, podemos atender à demanda de cada cliente com preços competitivos!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pt-120 pb-60">
+        <div class="pb-40">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-lg-8 col-xl-6" data-sal="slide-up" data-sal-duration="1000" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                        <span class="fs-18 fw-semibold text-primary mb-2">
+                            Visão Geral da Tecnologia
+                        </span>
+                        <h2 class="mb-0">
+                            Transferir um Nome de Domínio
+                            em 4 Passos Simples
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12" data-sal="fade" data-sal-duration="1500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                    <div class="card rounded-3">
+                        <div class="card-body p-md-6 p-xl-10">
+                            <div class="tab-content pb-40">
+                                <div class="tab-pane fade show active" id="validDomain">
+                                    <div class="row g-4 align-items-center">
+                                        <div class="col-md-6">
+                                            <img src="assets/img/setp-img-1.png" alt="image" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="badge fw-medium text-bg-primary">
+                                                Passo 01
+                                            </span>
+                                            <h5 class="mt-3 mb-4">
+                                                Nome de domínio que você deseja transferir
+                                            </h5>
+                                            <p class="mb-8">
+                                                Para iniciar a transferência do seu nome de domínio, por favor insira o nome de domínio que você deseja transferir no campo fornecido abaixo. Certifique-se de que seu nome de domínio está desbloqueado e que você tem acesso.
+                                            </p>
+                                            <ul class="list-unstyled p-0 m-0">
+                                                <li class="d-flex align-items-start gap-2 mb-4 max-text-36">
+                                                    <div class="w-5 h-5 d-grid place-content-center bg-primary rounded-circle fs-10 text-white flex-shrink-0">
+                                                        <i class="las la-check"></i>
+                                                    </div>
+                                                    <span class="d-block">
+                                                        <strong>Nome de domínio:</strong> Insira o nome de domínio completo que você deseja transferir
+                                                    </span>
+                                                </li>
+                                                <li class="d-flex align-items-start gap-2 max-text-36">
+                                                    <div class="w-5 h-5 d-grid place-content-center bg-primary rounded-circle fs-10 text-white flex-shrink-0">
+                                                        <i class="las la-check"></i>
+                                                    </div>
+                                                    <span class="d-block">
+                                                        <strong>Desbloqueio de domínio:</strong> Certifique-se de que seu nome de domínio está desbloqueado para transferência
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="unlockedDomain">
+                                    <div class="row g-4 align-items-center">
+                                        <div class="col-md-6">
+                                            <img src="assets/img/setp-img-1.png" alt="image" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="badge fw-medium text-bg-primary">
+                                                Passo 02
+                                            </span>
+                                            <h5 class="mt-3 mb-4">
+                                                Nome de domínio que você deseja transferir
+                                            </h5>
+                                            <p class="mb-8">
+                                                Para iniciar a transferência do seu nome de domínio, por favor insira o nome de domínio que você deseja transferir no campo fornecido abaixo. Certifique-se de que seu nome de domínio está desbloqueado e que você tem acesso.
+                                            </p>
+                                            <ul class="list-unstyled p-0 m-0">
+                                                <li class="d-flex align-items-start gap-2 mb-4 max-text-36">
+                                                    <div class="w-5 h-5 d-grid place-content-center bg-primary rounded-circle fs-10 text-white flex-shrink-0">
+                                                        <i class="las la-check"></i>
+                                                    </div>
+                                                    <span class="d-block">
+                                                        <strong>Nome de domínio:</strong> Insira o nome de domínio completo que você deseja transferir
+                                                    </span>
+                                                </li>
+                                                <li class="d-flex align-items-start gap-2 max-text-36">
+                                                    <div class="w-5 h-5 d-grid place-content-center bg-primary rounded-circle fs-10 text-white flex-shrink-0">
+                                                        <i class="las la-check"></i>
+                                                    </div>
+                                                    <span class="d-block">
+                                                        <strong>Desbloqueio de domínio:</strong> Certifique-se de que seu nome de domínio está desbloqueado para transferência
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="actNow">
+                                    <div class="row g-4 align-items-center">
+                                        <div class="col-md-6">
+                                            <img src="assets/img/setp-img-1.png" alt="image" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="badge fw-medium text-bg-primary">
+                                                Passo 03
+                                            </span>
+                                            <h5 class="mt-3 mb-4">
+                                                Nome de domínio que você deseja transferir
+                                            </h5>
+                                            <p class="mb-8">
+                                                Para iniciar a transferência do seu nome de domínio, por favor insira o nome de domínio que você deseja transferir no campo fornecido abaixo. Certifique-se de que seu nome de domínio está desbloqueado e que você tem acesso.
+                                            </p>
+                                            <ul class="list-unstyled p-0 m-0">
+                                                <li class="d-flex align-items-start gap-2 mb-4 max-text-36">
+                                                    <div class="w-5 h-5 d-grid place-content-center bg-primary rounded-circle fs-10 text-white flex-shrink-0">
+                                                        <i class="las la-check"></i>
+                                                    </div>
+                                                    <span class="d-block">
+                                                        <strong>Nome de domínio:</strong> Insira o nome de domínio completo que você deseja transferir
+                                                    </span>
+                                                </li>
+                                                <li class="d-flex align-items-start gap-2 max-text-36">
+                                                    <div class="w-5 h-5 d-grid place-content-center bg-primary rounded-circle fs-10 text-white flex-shrink-0">
+                                                        <i class="las la-check"></i>
+                                                    </div>
+                                                    <span class="d-block">
+                                                        <strong>Desbloqueio de domínio:</strong> Certifique-se de que seu nome de domínio está desbloqueado para transferência
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="optionDomain">
+                                    <div class="row g-4 align-items-center">
+                                        <div class="col-md-6">
+                                            <img src="assets/img/setp-img-1.png" alt="image" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="badge fw-medium text-bg-primary">
+                                                Passo 04
+                                            </span>
+                                            <h5 class="mt-3 mb-4">
+                                                Nome de domínio que você deseja transferir
+                                            </h5>
+                                            <p class="mb-8">
+                                                Para iniciar a transferência do seu nome de domínio, por favor insira o nome de domínio que você deseja transferir no campo fornecido abaixo. Certifique-se de que seu nome de domínio está desbloqueado e que você tem acesso.
+                                            </p>
+                                            <ul class="list-unstyled p-0 m-0">
+                                                <li class="d-flex align-items-start gap-2 mb-4 max-text-36">
+                                                    <div class="w-5 h-5 d-grid place-content-center bg-primary rounded-circle fs-10 text-white flex-shrink-0">
+                                                        <i class="las la-check"></i>
+                                                    </div>
+                                                    <span class="d-block">
+                                                        <strong>Nome de domínio:</strong> Insira o nome de domínio completo que você deseja transferir
+                                                    </span>
+                                                </li>
+                                                <li class="d-flex align-items-start gap-2 max-text-36">
+                                                    <div class="w-5 h-5 d-grid place-content-center bg-primary rounded-circle fs-10 text-white flex-shrink-0">
+                                                        <i class="las la-check"></i>
+                                                    </div>
+                                                    <span class="d-block">
+                                                        <strong>Desbloqueio de domínio:</strong> Certifique-se de que seu nome de domínio está desbloqueado para transferência
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="nav nav-pills nav-tab-list justify-content-center">
+                                <li class="nav-item">
+                                    <button class="nav-tab__btn nav-link active" data-bs-toggle="pill" data-bs-target="#validDomain" type="button">
+                                        <span class="d-flex align-items-center gap-1">
+                                            <span class="nav-tab__line flex-shrink-0"></span>
+                                        <span
+                                                class="d-inline-block fw-medium fs-14 text-primary nav-tab__subtitle">01</span>
+                                        </span>
+                                        <span class="nav-tab__title d-block fw-semibold h6 fs-14 mb-0">
+                                            Domínio é válido
+                                        </span>
+                                    </button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-tab__btn nav-link" data-bs-toggle="pill" data-bs-target="#unlockedDomain" type="button">
+                                        <span class="d-flex align-items-center gap-1">
+                                            <span class="nav-tab__line flex-shrink-0"></span>
+                                        <span
+                                                class="d-inline-block fw-medium fs-14 text-primary nav-tab__subtitle">02</span>
+                                        </span>
+                                        <span class="nav-tab__title d-block fw-semibold h6 fs-14 mb-0">
+                                            Domínio está desbloqueado
+                                        </span>
+                                    </button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-tab__btn nav-link" data-bs-toggle="pill" data-bs-target="#actNow" type="button">
+                                        <span class="d-flex align-items-center gap-1">
+                                            <span class="nav-tab__line flex-shrink-0"></span>
+                                        <span
+                                                class="d-inline-block fw-medium fs-14 text-primary nav-tab__subtitle">03</span>
+                                        </span>
+                                        <span class="nav-tab__title d-block fw-semibold h6 fs-14 mb-0">
+                                            Agir Agora
+                                        </span>
+                                    </button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="nav-tab__btn nav-link" data-bs-toggle="pill" data-bs-target="#optionDomain" type="button">
+                                        <span class="d-flex align-items-center gap-1">
+                                            <span class="nav-tab__line flex-shrink-0"></span>
+                                        <span
+                                                class="d-inline-block fw-medium fs-14 text-primary nav-tab__subtitle">04</span>
+                                        </span>
+                                        <span class="nav-tab__title d-block fw-semibold h6 fs-14 mb-0">
+                                            Opções Disponíveis
+                                        </span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pt-60 pb-120">
+        <div class="pb-40">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="text-center" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                            <span class="fs-18 fw-semibold text-primary mb-2" data-sal="slide-up" data-sal-duration="1000"
+                                data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                                FAQ
+                            </span>
+                            <h2>
+                                Perguntas Frequentes sobre Registro de Domínio
+                            </h2>
+                            <p class="mb-0 max-text-52 mx-auto">
+                                A melhor coisa que amamos sobre GouTec é que ele faz sincronização bidirecional com o Google para melhor organizar e manter tudo em ordem.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-10 col-xl-8">
+                    <div class="accordion border-0 vps-hosting-accordion" id="accordionFaq2">
+                        <div class="accordion-item border rounded-3 mb-4" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button bg-transparent collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-collapseOneA" aria-expanded="false" aria-controls="faq-collapseOneA">
+                                    <span class="text-body fs-16 fw-bold">O que é hospedagem compartilhada?</span>
+                                </button>
+                            </h2>
+                            <div id="faq-collapseOneA" class="accordion-collapse collapse show" data-bs-parent="#accordionFaq2">
+                                <div class="accordion-body pt-0">Nós cuidamos da segurança de forma muito grande — e assim como seus visitantes do site. Com uma conta de Hospedagem Compartilhada, você recebe um certificado SSL gratuito para adicionar ao seu site. Neste dia e idade, ter um SSL para seu site é uma prática best-practice. Não só um SSL ajuda seus visitantes a se sentirem seguros interagindo com seu site — isso é particularmente importante se você opera um site de comércio eletrônico.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item border rounded-3 mb-4" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button bg-transparent collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-collapseTwoA" aria-expanded="false" aria-controls="faq-collapseTwoA">
+                                    <span class="text-body fs-16 fw-bold">Quantos sites eu posso hospedar?</span>
+                                </button>
+                            </h2>
+                            <div id="faq-collapseTwoA" class="accordion-collapse collapse" data-bs-parent="#accordionFaq2">
+                                <div class="accordion-body pt-0">Nós cuidamos da segurança de forma muito grande — e assim como seus visitantes do site. Com uma conta de Hospedagem Compartilhada, você recebe um certificado SSL gratuito para adicionar ao seu site. Neste dia e idade, ter um SSL para seu site é uma prática best-practice. Não só um SSL ajuda seus visitantes a se sentirem seguros interagindo com seu site — isso é particularmente importante se você opera um site de comércio eletrônico.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item border rounded-3 mb-4" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button bg-transparent collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-collapse3A" aria-expanded="false" aria-controls="faq-collapse3A">
+                                    <span class="text-body fs-16 fw-bold">Você inclui certificados SSL?</span>
+                                </button>
+                            </h2>
+                            <div id="faq-collapse3A" class="accordion-collapse collapse" data-bs-parent="#accordionFaq2">
+                                <div class="accordion-body pt-0">Nós cuidamos da segurança de forma muito grande — e assim como seus visitantes do site. Com uma conta de Hospedagem Compartilhada, você recebe um certificado SSL gratuito para adicionar ao seu site. Neste dia e idade, ter um SSL para seu site é uma prática best-practice. Não só um SSL ajuda seus visitantes a se sentirem seguros interagindo com seu site — isso é particularmente importante se você opera um site de comércio eletrônico.</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item border rounded-3 mb-4" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button bg-transparent collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-collapse4A" aria-expanded="false" aria-controls="faq-collapse4A">
+                                    <span class="text-body fs-16 fw-bold">Como usar o recurso Track Delivery no
+                                        cPanel?</span>
+                                </button>
+                            </h2>
+                            <div id="faq-collapse4A" class="accordion-collapse collapse" data-bs-parent="#accordionFaq2">
+                                <div class="accordion-body pt-0">Nós nos importamos muito com a segurança — e os visitantes do seu site também. Com uma conta de Hospedagem Compartilhada, você recebe um certificado SSL gratuitamente para adicionar ao seu site. Nos dias de hoje, ter um SSL para o seu site é uma prática essencial. Um SSL não apenas ajuda seus visitantes a se sentirem seguros ao interagir com o seu site — isso é particularmente importante se você administra um site de e-commerce.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer CTA -->
+    <div class="footer-cta">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    <div class="bg-primary pt-60 pb-60 px-6 px-md-12 rounded-3 overflow-hidden position-relative z-1 text-center" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8 col-xl-7 col-xxl-6">
+                                <h4 class="text-white mb-4">
+                                    Experimente Nosso Serviço com um
+                                    Teste Grátis de 7 Dias
+                                </h4>
+                                <a href="contact.html" class="btn btn-light btn-arrow btn-arrow-xl btn-lg fs-14 fw-semibold rounded">
+                                    <span class="btn-arrow__text">
+                                        Inscreva-se - Teste Grátis
+                                        <span class="btn-arrow__icon">
+                                            <i class="las la-arrow-right"></i>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <img src="assets/img/footer-cta-left.png" alt="image" class="img-fluid d-none d-md-block position-absolute top-0 start-0 z-n1 opacity-75">
+                        <img src="assets/img/footer-cta-right.png" alt="image" class="img-fluid d-none d-md-block position-absolute end-0 top-0 z-n1 opacity-75">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /Footer CTA -->
+
+    <!-- Footer -->
+    <footer class="footer-2-area pt-120 pb-5 bg-dark position-relative z-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <img src="assets/img/logo-light.png" alt="image" class="logo__img">
+                    <p class="text-white text-opacity-75 mt-8">Se você opera um site de comércio eletrônico ou um site web, você quer atrair tantos visitantes quanto possível ou quando você não quer mais ser limitado por</p>
+                    <h6 class="text-white mt-6 mb-4 fs-16">Redes Sociais</h6>
+                    <div class="d-inline-flex align-items-center justify-content-center gap-2">
+                        <a href="#" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border border-light border-opacity-10">
+                            <span class="text-white"><i class="lab la-twitter"></i></span>
+                        </a>
+                        <a href="#" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border border-light border-opacity-10">
+                            <span class="text-white"><i class="lab la-facebook-f"></i></span>
+                        </a>
+                        <a href="#" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border border-light border-opacity-10">
+                            <span class="text-white"><i class="lab la-dribbble"></i></span>
+                        </a>
+                        <a href="#" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border border-light border-opacity-10">
+                            <span class="text-white"><i class="lab la-behance"></i></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="ps-xl-10">
+                        <h6 class="text-white fs-16 mt-3 mb-8">Produtos e Soluções</h6>
+                        <ul class="list-unstyled d-flex flex-column gap-2">
+                            <li><a href="#" class="footer-2-link">Hospedagem Compartilhada</a></li>
+                            <li><a href="#" class="footer-2-link">Hospedagem WordPress</a></li>
+                            <li><a href="#" class="footer-2-link">Hospedagem VPS</a></li>
+                            <li><a href="#" class="footer-2-link">Hospedagem Cloud</a></li>
+                            <li><a href="#" class="footer-2-link">Hospedagem Dedicada</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="ps-xl-5">
+                        <h6 class="text-white fs-16 mt-3 mb-8">GouTec Recursos</h6>
+                        <ul class="list-unstyled d-flex flex-column gap-2">
+                            <li><a href="#" class="footer-2-link">Painel de Controle</a></li>
+                            <li><a href="#" class="footer-2-link">Sistema Operacional</a></li>
+                            <li><a href="#" class="footer-2-link">Uptime de 99,9%</a></li>
+                            <li><a href="#" class="footer-2-link">DDOS Protection</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="ps-xl-5">
+                        <h6 class="text-white fs-16 mt-3 mb-8">Informações da Empresa</h6>
+                        <ul class="list-unstyled d-flex flex-column gap-2">
+                            <li><a href="#" class="footer-2-link">Sobre Nós</a></li>
+                            <li><a href="#" class="footer-2-link">Parceiros</a></li>
+                            <li><a href="#" class="footer-2-link">Base de Conhecimento</a></li>
+                            <li><a href="#" class="footer-2-link">Contato</a></li>
+                            <li><a href="#" class="footer-2-link">Notícias</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-20">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-5 pt-5 border-top border-light border-opacity-10">
+                    <p class="text-white mb-0 fs-14">&copy; 2025 GouTec. Todos os direitos reservados</p>
+                    <div class="d-inline-flex align-items-center justify-content-center gap-4 flex-wrap">
+                        <a href="terms.html" class="footer-2-link">
+                            Termos e Condições
+                        </a>
+                        <a href="privacy.html" class="footer-2-link">
+                            Política de Privacidade
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer><!-- /Footer -->
+
+    <div class="scroll-top scroll-to-target bg-primary text-white" data-target="html">
+        <span class="las la-hand-point-up"></span>
+    </div>
+
+    <!--build:js-->
+    <script src="assets/js/vendors/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/vendors/jquery-ui.min.js"></script>
+    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/vendors/swiper-bundle.min.js"></script>
+    <script src="assets/js/vendors/simplebar.min.js"></script>
+    <script src="assets/js/vendors/sal.js"></script>
+    <script src="assets/js/vendors/jquery.magnific-popup.min.js"></script>
+
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

@@ -6,10 +6,7 @@ if (!headers_sent()) {
 }
 require_once __DIR__ . '/../../app/bootstrap.php';
 
-$page_title = 'Footer do site';
-$active = 'footer';
-require_once __DIR__ . '/partials/layout_start.php';
-
+// Processar POST ANTES de qualquer output HTML
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_verify($_POST['_csrf'] ?? null);
 
@@ -133,6 +130,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+$page_title = 'Footer do site';
+$active = 'footer';
+require_once __DIR__ . '/partials/layout_start.php';
 
 $sections = db()->query("SELECT * FROM footer_sections ORDER BY sort_order ASC, id ASC")->fetchAll();
 $linksBySection = [];
