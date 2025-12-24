@@ -46,7 +46,7 @@ try {
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <h2 data-sal="slide-up" data-sal-duration="500" data-sal-delay="200" data-sal-easing="ease-in-out-sine">Nós amamos nossos clientes e eles amam nós também</h2>
+                <h2 data-sal="slide-up" data-sal-duration="500" data-sal-delay="200" data-sal-easing="ease-in-out-sine">Feedbacks</h2>
             </div>
         </div>
         <?php if (!empty($feedbacks)): ?>
