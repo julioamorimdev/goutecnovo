@@ -113,10 +113,10 @@ $copyright = fix_encoding(footer_get_setting('copyright', '&copy; 2024 GouTec. T
 
 // Redes sociais
 $socialLinks = [
-    'twitter' => footer_get_setting('social_twitter', '#'),
     'facebook' => footer_get_setting('social_facebook', '#'),
-    'dribbble' => footer_get_setting('social_dribbble', '#'),
-    'behance' => footer_get_setting('social_behance', '#'),
+    'whatsapp' => footer_get_setting('social_whatsapp', '#'),
+    'discord' => footer_get_setting('social_discord', '#'),
+    'instagram' => footer_get_setting('social_instagram', '#'),
 ];
 ?>
 
@@ -181,24 +181,24 @@ $socialLinks = [
             <div class="d-flex align-items-center justify-content-between flex-wrap gap-5 pt-5 border-top">
                 <p class="mb-0 fs-14"><?= $copyright ?></p>
                 <div class="d-inline-flex align-items-center justify-content-center gap-2">
-                    <?php if ($socialLinks['twitter'] !== ''): ?>
-                        <a href="<?= h($socialLinks['twitter']) ?>" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border">
-                            <span class="text-body"><i class="lab la-twitter"></i></span>
-                        </a>
-                    <?php endif; ?>
                     <?php if ($socialLinks['facebook'] !== ''): ?>
                         <a href="<?= h($socialLinks['facebook']) ?>" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border">
                             <span class="text-body"><i class="lab la-facebook-f"></i></span>
                         </a>
                     <?php endif; ?>
-                    <?php if ($socialLinks['dribbble'] !== ''): ?>
-                        <a href="<?= h($socialLinks['dribbble']) ?>" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border">
-                            <span class="text-body"><i class="lab la-dribbble"></i></span>
+                    <?php if ($socialLinks['whatsapp'] !== ''): ?>
+                        <a href="<?= h($socialLinks['whatsapp']) ?>" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border">
+                            <span class="text-body"><i class="lab la-whatsapp"></i></span>
                         </a>
                     <?php endif; ?>
-                    <?php if ($socialLinks['behance'] !== ''): ?>
-                        <a href="<?= h($socialLinks['behance']) ?>" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border">
-                            <span class="text-body"><i class="lab la-behance"></i></span>
+                    <?php if ($socialLinks['discord'] !== ''): ?>
+                        <a href="<?= h($socialLinks['discord']) ?>" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border">
+                            <span class="text-body"><i class="lab la-discord"></i></span>
+                        </a>
+                    <?php endif; ?>
+                    <?php if ($socialLinks['instagram'] !== ''): ?>
+                        <a href="<?= h($socialLinks['instagram']) ?>" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border">
+                            <span class="text-body"><i class="lab la-instagram"></i></span>
                         </a>
                     <?php endif; ?>
                 </div>
