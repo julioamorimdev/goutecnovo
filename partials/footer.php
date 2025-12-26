@@ -122,9 +122,27 @@ $socialLinks = [
 
 <!-- Footer -->
 <footer class="pt-120 pb-5">
-    <div class="container">
+    <style>
+        .footer-container-custom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        @media (min-width: 992px) {
+            .footer-col-section {
+                flex: 0 0 auto;
+                width: 20%;
+            }
+            .footer-col-main {
+                flex: 0 0 auto;
+                width: 30%;
+            }
+        }
+    </style>
+    <div class="footer-container-custom">
         <div class="row">
-            <div class="col-lg-4 col-md-6">
+            <div class="footer-col-main col-md-6">
                 <img src="<?= h($logoUrl) ?>" alt="image" class="logo__img">
                 <p class="mt-10 mb-8"><?= h($description) ?></p>
                 <?php if ($showNewsletter): ?>
@@ -143,14 +161,8 @@ $socialLinks = [
             // Calcular largura das colunas baseado no número de seções
             $numSections = count($sections);
             if ($numSections > 0) {
-                // Calcular classe de coluna baseado no número de seções
-                if ($numSections <= 3) {
-                    $colSize = (int)(12 / ($numSections + 1));
-                    $colClass = 'col-lg-' . $colSize;
-                } else {
-                    $colClass = 'col-lg-3';
-                }
-                $colClass .= ' col-md-6';
+                // Usar classe customizada para evitar quebra de linha
+                $colClass = 'footer-col-section col-md-6';
                 
                 foreach ($sections as $sec):
                     $secId = (int)$sec['id'];
