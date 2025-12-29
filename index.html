@@ -22,23 +22,6 @@
             position: relative;
         }
 
-        /* Efeito de neve */
-        .snowflake {
-            position: absolute;
-            top: -10px;
-            color: #fff;
-            font-size: 1em;
-            font-family: Arial;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
-            animation: fall linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
 
         .container {
             text-align: center;
@@ -50,7 +33,7 @@
         }
 
         .logo {
-            max-width: 300px;
+            max-width: 200px;
             width: 100%;
             height: auto;
             margin-bottom: 3rem;
@@ -218,6 +201,59 @@
             }
         }
 
+        /* Timer */
+        .countdown-container {
+            margin: 2rem auto;
+            max-width: 700px;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .countdown-title {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(79, 195, 247, 0.4);
+        }
+
+        .countdown-value {
+            color: #4fc3f7;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(79, 195, 247, 0.6);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .countdown-label {
+            color: #d0d0d0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -229,7 +265,17 @@
                 font-size: 1rem;
             }
             .logo {
-                max-width: 200px;
+                max-width: 150px;
+            }
+            .countdown-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            .countdown-value {
+                font-size: 2rem;
+            }
+            .countdown-title {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -237,9 +283,6 @@
 <body>
     <!-- Estrelas decorativas -->
     <div class="decorative-elements" id="stars"></div>
-
-    <!-- Flocos de neve -->
-    <div id="snowflakes"></div>
 
     <div class="container">
         <img src="assets/img/logo-light.png" alt="GouTec Logo" class="logo">
@@ -251,7 +294,7 @@
         <p class="message">
             Estamos preparando o <span class="highlight">novo site da GouTec</span> com uma experiência totalmente renovada.
             <br><br>
-            <strong>Lançamento: <span class="date">20 de Dezembro</span></strong>
+            <strong>Lançamento: <span class="date">01 de Janeiro</span></strong>
             <br><br>
             Prepare-se para as <span class="highlight">maiores promoções já vistas!</span>
         </p>
@@ -260,28 +303,31 @@
             <div class="progress-bar"></div>
             <div class="progress-text">Preparando novidades...</div>
         </div>
+
+        <div class="countdown-container">
+            <h2 class="countdown-title">⏰ Tempo Restante</h2>
+            <div class="countdown-grid">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label">Dias</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">Minutos</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">Segundos</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Criar flocos de neve
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.className = 'snowflake';
-            snowflake.innerHTML = '❄';
-            snowflake.style.left = Math.random() * 100 + '%';
-            snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            snowflake.style.opacity = Math.random() * 0.5 + 0.5;
-            snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
-            document.getElementById('snowflakes').appendChild(snowflake);
-
-            setTimeout(() => {
-                snowflake.remove();
-            }, 5000);
-        }
-
-        // Criar múltiplos flocos de neve
-        setInterval(createSnowflake, 300);
-
         // Criar estrelas decorativas
         function createStars() {
             const starsContainer = document.getElementById('stars');
@@ -299,6 +345,43 @@
         }
 
         createStars();
+
+        // Timer countdown para 01/01/2026 00:00 (horário de Brasília - UTC-3)
+        function updateCountdown() {
+            // Data alvo: 01 de Janeiro de 2026, 00:00:00 horário de Brasília (UTC-3)
+            const targetDate = new Date('2026-01-01T00:00:00-03:00');
+            
+            // Obter data atual no horário de Brasília
+            const now = new Date();
+            const brasiliaOffset = -3 * 60; // UTC-3 em minutos
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            const brasiliaTime = new Date(utc + (brasiliaOffset * 60000));
+            
+            // Calcular diferença
+            const difference = targetDate.getTime() - brasiliaTime.getTime();
+            
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            } else {
+                // Se a data já passou
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+
+        // Atualizar o countdown a cada segundo
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
