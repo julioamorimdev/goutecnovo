@@ -634,6 +634,75 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
+  // Pricing Tabs (Mensal/Anual) - Para páginas que usam tabs do Bootstrap
+  const pricingTabs = document.querySelectorAll('[data-bs-toggle="pill"][data-bs-target]');
+  if (pricingTabs.length > 0) {
+    // Função para atualizar a exibição dos preços baseado na aba ativa
+    const updatePricingDisplay = () => {
+      const storageOpt = document.querySelector('#storageOpt');
+      const accountOpt = document.querySelector('#accountOpt');
+      
+      if (storageOpt && accountOpt) {
+        // Verificar qual tab está ativa
+        const storageActive = storageOpt.classList.contains('show') && storageOpt.classList.contains('active');
+        const accountActive = accountOpt.classList.contains('show') && accountOpt.classList.contains('active');
+        
+        if (storageActive) {
+          // Aba Mensal ativa - mostrar mensais, esconder anuais
+          storageOpt.querySelectorAll('.monthly-price').forEach(el => {
+            el.style.display = 'block';
+          });
+          storageOpt.querySelectorAll('.yearly-price').forEach(el => {
+            el.style.display = 'none';
+          });
+        } else if (accountActive) {
+          // Aba Anual ativa - mostrar anuais, esconder mensais
+          accountOpt.querySelectorAll('.monthly-price').forEach(el => {
+            el.style.display = 'none';
+          });
+          accountOpt.querySelectorAll('.yearly-price').forEach(el => {
+            el.style.display = 'block';
+          });
+        }
+      }
+    };
+
+    // Inicializar ao carregar
+    setTimeout(updatePricingDisplay, 200);
+
+    // Observar mudanças nas classes dos tab-panes
+    const storageOpt = document.querySelector('#storageOpt');
+    const accountOpt = document.querySelector('#accountOpt');
+    
+    if (storageOpt && accountOpt) {
+      const observer = new MutationObserver(() => {
+        updatePricingDisplay();
+      });
+
+      observer.observe(storageOpt, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+
+      observer.observe(accountOpt, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+    }
+
+    // Escutar cliques nas tabs
+    pricingTabs.forEach(tab => {
+      tab.addEventListener('click', function () {
+        setTimeout(updatePricingDisplay, 150);
+      });
+      
+      // Escutar eventos do Bootstrap
+      tab.addEventListener('shown.bs.tab', function () {
+        updatePricingDisplay();
+      });
+    });
+  }
+
   // Timeline Slider Nav
   const timelineSliderNav = document.querySelector(".timeline-slider-nav");
   const timelineSliderContent = document.querySelector(".timeline-slider-content");
