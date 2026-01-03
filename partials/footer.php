@@ -111,13 +111,21 @@ $description = fix_encoding(footer_get_setting('description', 'Se você tem um s
 $showNewsletter = footer_get_setting('show_newsletter', '1') === '1';
 $copyright = fix_encoding(footer_get_setting('copyright', '&copy; 2024 GouTec. Todos os direitos reservados'));
 
-// Redes sociais
-$socialLinks = [
-    'facebook' => footer_get_setting('social_facebook', '#'),
-    'whatsapp' => footer_get_setting('social_whatsapp', '#'),
-    'discord' => footer_get_setting('social_discord', '#'),
-    'instagram' => footer_get_setting('social_instagram', '#'),
-];
+// Redes sociais - buscar da tabela footer_social_icons
+$socialIcons = [];
+try {
+    if (function_exists('db')) {
+        // Garantir UTF-8 na conexão
+        db()->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+        db()->exec("SET CHARACTER SET utf8mb4");
+        db()->exec("SET character_set_connection=utf8mb4");
+        
+        $socialIcons = db()->query("SELECT * FROM footer_social_icons WHERE is_enabled=1 ORDER BY sort_order ASC, id ASC")->fetchAll();
+    }
+} catch (Throwable $e) {
+    // Tabela pode não existir ainda, usar valores padrão
+    $socialIcons = [];
+}
 ?>
 
 <!-- Footer -->
@@ -192,28 +200,15 @@ $socialLinks = [
         <div class="mt-20">
             <div class="d-flex align-items-center justify-content-between flex-wrap gap-5 pt-5 border-top">
                 <p class="mb-0 fs-14"><?= $copyright ?></p>
-                <div class="d-inline-flex align-items-center justify-content-center gap-2">
-                    <?php if ($socialLinks['facebook'] !== ''): ?>
-                        <a href="<?= h($socialLinks['facebook']) ?>" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border">
-                            <span class="text-body"><i class="lab la-facebook-f"></i></span>
-                        </a>
-                    <?php endif; ?>
-                    <?php if ($socialLinks['whatsapp'] !== ''): ?>
-                        <a href="<?= h($socialLinks['whatsapp']) ?>" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border">
-                            <span class="text-body"><i class="lab la-whatsapp"></i></span>
-                        </a>
-                    <?php endif; ?>
-                    <?php if ($socialLinks['discord'] !== ''): ?>
-                        <a href="<?= h($socialLinks['discord']) ?>" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border">
-                            <span class="text-body"><i class="lab la-discord"></i></span>
-                        </a>
-                    <?php endif; ?>
-                    <?php if ($socialLinks['instagram'] !== ''): ?>
-                        <a href="<?= h($socialLinks['instagram']) ?>" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border">
-                            <span class="text-body"><i class="lab la-instagram"></i></span>
-                        </a>
-                    <?php endif; ?>
-                </div>
+                <?php if (!empty($socialIcons)): ?>
+                    <div class="d-inline-flex align-items-center justify-content-center gap-2">
+                        <?php foreach ($socialIcons as $icon): ?>
+                            <a href="<?= h($icon['url']) ?>" class="social-icon w-9 h-9 d-inline-flex align-items-center justify-content-center rounded-circle border" target="_blank" rel="noopener noreferrer">
+                                <span class="text-body"><i class="<?= h($icon['icon_class']) ?>"></i></span>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

@@ -12,7 +12,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $action = $_POST['action'] ?? '';
     $id = (int)($_POST['id'] ?? 0);
-    $type = $_POST['type'] ?? ''; // 'section' ou 'link'
+    $type = $_POST['type'] ?? ''; // 'section', 'link' ou 'social'
+    
+    if ($type === 'social') {
+        if ($id > 0 && $action === 'toggle') {
+            db()->prepare("UPDATE footer_social_icons SET is_enabled = IF(is_enabled=1,0,1) WHERE id=?")->execute([$id]);
+            header('Location: /admin/footer.php');
+            exit;
+        }
+        if ($id > 0 && ($action === 'move_up' || $action === 'move_down')) {
+            $stmt = db()->prepare("SELECT id, sort_order FROM footer_social_icons WHERE id=?");
+            $stmt->execute([$id]);
+            $cur = $stmt->fetch();
+            if ($cur) {
+                $sort = (int)$cur['sort_order'];
+
+                if ($action === 'move_up') {
+                    $q = "SELECT id, sort_order FROM footer_social_icons
+                          WHERE (sort_order < :sort OR (sort_order = :sort AND id < :id))
+                          ORDER BY sort_order DESC, id DESC
+                          LIMIT 1";
+                } else {
+                    $q = "SELECT id, sort_order FROM footer_social_icons
+                          WHERE (sort_order > :sort OR (sort_order = :sort AND id > :id))
+                          ORDER BY sort_order ASC, id ASC
+                          LIMIT 1";
+                }
+
+                $stmt2 = db()->prepare($q);
+                $stmt2->execute([
+                    ':sort' => $sort,
+                    ':id' => $id,
+                ]);
+                $neighbor = $stmt2->fetch();
+
+                if ($neighbor) {
+                    $nid = (int)$neighbor['id'];
+                    $nsort = (int)$neighbor['sort_order'];
+
+                    $tx = db()->beginTransaction();
+                    try {
+                        db()->prepare("UPDATE footer_social_icons SET sort_order=? WHERE id=?")->execute([$nsort, $id]);
+                        db()->prepare("UPDATE footer_social_icons SET sort_order=? WHERE id=?")->execute([$sort, $nid]);
+                        db()->commit();
+                    } catch (Throwable $e) {
+                        if ($tx) db()->rollBack();
+                    }
+                }
+            }
+            header('Location: /admin/footer.php');
+            exit;
+        }
+        if ($id > 0 && $action === 'delete') {
+            db()->prepare("DELETE FROM footer_social_icons WHERE id=?")->execute([$id]);
+            header('Location: /admin/footer.php');
+            exit;
+        }
+    }
     
     if ($type === 'section') {
         if ($id > 0 && $action === 'toggle') {
@@ -141,6 +197,15 @@ foreach ($sections as $sec) {
     $stmt = db()->prepare("SELECT * FROM footer_links WHERE section_id=? ORDER BY sort_order ASC, id ASC");
     $stmt->execute([(int)$sec['id']]);
     $linksBySection[(int)$sec['id']] = $stmt->fetchAll();
+}
+
+// Buscar ícones de redes sociais
+$socialIcons = [];
+try {
+    $socialIcons = db()->query("SELECT * FROM footer_social_icons ORDER BY sort_order ASC, id ASC")->fetchAll();
+} catch (Throwable $e) {
+    // Tabela pode não existir ainda
+    $socialIcons = [];
 }
 ?>
 
@@ -332,6 +397,122 @@ foreach ($sections as $sec) {
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+</div>
+
+<!-- Seção de Ícones de Redes Sociais -->
+<div class="card shadow-sm rounded-3 mt-4">
+    <div class="card-header bg-light">
+        <div class="d-flex align-items-center justify-content-between">
+            <h6 class="mb-0">Ícones de Redes Sociais</h6>
+            <a class="btn btn-sm btn-primary" href="/admin/footer_social_edit.php">
+                <i class="las la-plus me-1"></i>Novo ícone
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <?php if (empty($socialIcons)): ?>
+            <div class="text-center text-body-secondary py-4">
+                <p class="mb-2">Nenhum ícone de rede social criado ainda.</p>
+                <a class="btn btn-sm btn-primary" href="/admin/footer_social_edit.php">Criar primeiro ícone</a>
+            </div>
+        <?php else: ?>
+            <div class="table-responsive">
+                <table class="table table-sm table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Ícone</th>
+                            <th>URL</th>
+                            <th>Status</th>
+                            <th class="text-end">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($socialIcons as $icon): ?>
+                            <?php
+                            $iconId = (int)$icon['id'];
+                            $iconEnabled = (int)$icon['is_enabled'] === 1;
+                            ?>
+                            <tr>
+                                <td><?= h($icon['name']) ?></td>
+                                <td>
+                                    <span class="badge bg-light text-dark">
+                                        <i class="<?= h($icon['icon_class']) ?>"></i>
+                                        <?= h($icon['icon_class']) ?>
+                                    </span>
+                                </td>
+                                <td><code class="small"><?= h($icon['url']) ?></code></td>
+                                <td>
+                                    <?php if ($iconEnabled): ?>
+                                        <span class="badge bg-success">Ativo</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-secondary">Desativado</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td class="text-end">
+                                    <div class="dropdown d-inline-block">
+                                        <button class="btn btn-sm btn-outline-dark" type="button" data-bs-toggle="dropdown">
+                                            <i class="las la-ellipsis-v"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li>
+                                                <a class="dropdown-item" href="/admin/footer_social_edit.php?id=<?= $iconId ?>">
+                                                    <i class="las la-edit me-2"></i>Editar
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <form method="post" class="m-0">
+                                                    <input type="hidden" name="_csrf" value="<?= h(csrf_token()) ?>">
+                                                    <input type="hidden" name="id" value="<?= $iconId ?>">
+                                                    <input type="hidden" name="type" value="social">
+                                                    <button class="dropdown-item" name="action" value="toggle" type="submit">
+                                                        <i class="las <?= $iconEnabled ? 'la-eye-slash' : 'la-eye' ?> me-2"></i>
+                                                        <?= $iconEnabled ? 'Desabilitar' : 'Habilitar' ?>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li>
+                                                <form method="post" class="m-0">
+                                                    <input type="hidden" name="_csrf" value="<?= h(csrf_token()) ?>">
+                                                    <input type="hidden" name="id" value="<?= $iconId ?>">
+                                                    <input type="hidden" name="type" value="social">
+                                                    <button class="dropdown-item" name="action" value="move_up" type="submit">
+                                                        <i class="las la-arrow-up me-2"></i>Subir
+                                                    </button>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <form method="post" class="m-0">
+                                                    <input type="hidden" name="_csrf" value="<?= h(csrf_token()) ?>">
+                                                    <input type="hidden" name="id" value="<?= $iconId ?>">
+                                                    <input type="hidden" name="type" value="social">
+                                                    <button class="dropdown-item" name="action" value="move_down" type="submit">
+                                                        <i class="las la-arrow-down me-2"></i>Descer
+                                                    </button>
+                                                </form>
+                                            </li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li>
+                                                <form method="post" class="m-0" onsubmit="return confirm('Excluir este ícone de rede social?')">
+                                                    <input type="hidden" name="_csrf" value="<?= h(csrf_token()) ?>">
+                                                    <input type="hidden" name="id" value="<?= $iconId ?>">
+                                                    <input type="hidden" name="type" value="social">
+                                                    <button class="dropdown-item text-danger" name="action" value="delete" type="submit">
+                                                        <i class="las la-trash me-2"></i>Excluir
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         <?php endif; ?>
     </div>
 </div>
