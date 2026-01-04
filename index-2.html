@@ -131,38 +131,20 @@
                                     <form action="#" class="domain-form-one mx-auto position-relative mt-8" data-sal="slide-up" data-sal-duration="500" data-sal-delay="200" data-sal-easing="ease-in-out-sine">
                                         <input type="text" class="form-control bg-transparent p-4" placeholder="Nome do Domínio">
                                         <div class="domain-submit-box d-flex align-items-center gap-3 position-absolute">
-                                            <select class="border-0 bg-transparent">
-                                                <option value=".com.br">.com.br</option>
-                                                <option value=".com">.com</option>
-                                                <option value=".net">.net</option>
-                                                <option value=".org">.org</option>
-                                                <option value=".biz">.biz</option>
-                                                <option value=".info">.info</option>
-                                            </select>
+                                            <div id="tld-select-container">
+                                                <!-- TLDS serão carregados aqui via JavaScript -->
+                                                <select class="border-0 bg-transparent">
+                                                    <option value=".com.br">.com.br</option>
+                                                    <option value=".com">.com</option>
+                                                    <option value=".net">.net</option>
+                                                    <option value=".org">.org</option>
+                                                </select>
+                                            </div>
                                             <button class="btn btn-primary rounded-2 fw-bold" type="submit">Buscar</button>
                                         </div>
                                     </form>
-                                    <div class="d-flex align-items-center justify-content-center gap-4 flex-wrap flex-xl-nowrap mt-6" data-sal="slide-up" data-sal-duration="500" data-sal-delay="200" data-sal-easing="ease-in-out-sine">
-                                        <button type="button" class="btn btn-sm btn-light d-inline-flex align-items-center gap-2 border border-gray-100">
-                                            <span class="h6 mb-1 text-primary d-inline-bloock">.com.br</span>
-                                            <small class="fw-medium d-inline-block">R$49,00/Ano</small>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-light d-inline-flex align-items-center gap-2 border border-gray-100">
-                                            <span class="h6 mb-1 text-danger d-inline-bloock">.com</span>
-                                            <small class="fw-medium d-inline-block">R$69,00/Ano</small>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-light d-inline-flex align-items-center gap-2 border border-gray-100">
-                                            <span class="h6 mb-1 text-warning d-inline-bloock">.net</span>
-                                            <small class="fw-medium d-inline-block">R$84,00/Ano</small>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-light d-inline-flex align-items-center gap-2 border border-gray-100">
-                                            <span class="h6 mb-1 text-warning d-inline-bloock">.org</span>
-                                            <small class="fw-medium d-inline-block">R$59,00/Ano</small>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-light d-inline-flex align-items-center gap-2 border border-gray-100">
-                                            <span class="h6 mb-1 text-success d-inline-bloock">.info</span>
-                                            <small class="fw-medium d-inline-block">R$25,00/Ano</small>
-                                        </button>
+                                    <div id="tld-buttons-container">
+                                        <!-- Botões de TLDS serão carregados aqui via JavaScript -->
                                     </div>
                                 </div>
                             </div>
@@ -1008,6 +990,50 @@
                     }
                 } catch (error) {
                     console.error('Erro ao carregar blog:', error);
+                }
+            })();
+
+            // Carregar TLDS destacados (select)
+            (async function() {
+                try {
+                    const response = await fetch('partials/tlds.php', {
+                        headers: {
+                            'Accept': 'text/html; charset=utf-8',
+                        }
+                    });
+                    if (response.ok) {
+                        const html = await response.text();
+                        if (!html.includes('<?php') && !html.includes('<?=') && !html.trim().startsWith('<?')) {
+                            const container = document.getElementById('tld-select-container');
+                            if (container) {
+                                container.innerHTML = html.trim();
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error('Erro ao carregar TLDS select:', error);
+                }
+            })();
+
+            // Carregar botões de TLDS destacados
+            (async function() {
+                try {
+                    const response = await fetch('partials/tlds_buttons.php', {
+                        headers: {
+                            'Accept': 'text/html; charset=utf-8',
+                        }
+                    });
+                    if (response.ok) {
+                        const html = await response.text();
+                        if (!html.includes('<?php') && !html.includes('<?=') && !html.trim().startsWith('<?')) {
+                            const container = document.getElementById('tld-buttons-container');
+                            if (container) {
+                                container.innerHTML = html.trim();
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error('Erro ao carregar botões de TLDS:', error);
                 }
             })();
         });

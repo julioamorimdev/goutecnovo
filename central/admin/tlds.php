@@ -138,6 +138,7 @@ try {
                                 <th>Preço Transferência</th>
                                 <th>Anos (Min/Max)</th>
                                 <th style="width: 100px;">Status</th>
+                                <th style="width: 100px;">Destaque</th>
                                 <th style="width: 200px;">Ações</th>
                             </tr>
                         </thead>
@@ -170,6 +171,13 @@ try {
                                             <span class="badge bg-success">Ativo</span>
                                         <?php else: ?>
                                             <span class="badge bg-danger">Inativo</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if ((int)($tld['is_featured'] ?? 0) === 1): ?>
+                                            <span class="badge bg-warning text-dark">Destaque</span>
+                                        <?php else: ?>
+                                            <span class="badge bg-secondary">Normal</span>
                                         <?php endif; ?>
                                     </td>
                                     <td>

@@ -13,12 +13,14 @@ CREATE TABLE IF NOT EXISTS tlds (
   privacy_protection_available TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Proteção de privacidade disponível',
   privacy_protection_price DECIMAL(10,2) NOT NULL DEFAULT 0.00 COMMENT 'Preço da proteção de privacidade',
   is_enabled TINYINT(1) NOT NULL DEFAULT 1 COMMENT 'TLD ativo/inativo',
+  is_featured TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'TLD em destaque (aparece no site)',
   sort_order INT NOT NULL DEFAULT 0 COMMENT 'Ordem de exibição',
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   UNIQUE KEY uk_tld (tld),
   KEY idx_tld_enabled (is_enabled),
+  KEY idx_tld_featured (is_featured),
   KEY idx_tld_sort (sort_order)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -53,15 +55,15 @@ CREATE TABLE IF NOT EXISTS domain_registrations (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Seed inicial de TLDs comuns
-INSERT IGNORE INTO tlds (tld, name, description, price_register, price_renew, price_transfer, min_years, max_years, epp_code_required, privacy_protection_available, privacy_protection_price, is_enabled, sort_order)
+INSERT IGNORE INTO tlds (tld, name, description, price_register, price_renew, price_transfer, min_years, max_years, epp_code_required, privacy_protection_available, privacy_protection_price, is_enabled, is_featured, sort_order)
 VALUES
-  ('.com', 'Domínio .com', 'Domínio comercial internacional', 39.90, 39.90, 39.90, 1, 10, 1, 1, 19.90, 1, 1),
-  ('.com.br', 'Domínio .com.br', 'Domínio comercial brasileiro', 39.90, 39.90, 39.90, 1, 1, 0, 0, 0.00, 1, 2),
-  ('.net', 'Domínio .net', 'Domínio de rede', 49.90, 49.90, 49.90, 1, 10, 1, 1, 19.90, 1, 3),
-  ('.org', 'Domínio .org', 'Domínio para organizações', 49.90, 49.90, 49.90, 1, 10, 1, 1, 19.90, 1, 4),
-  ('.br', 'Domínio .br', 'Domínio brasileiro genérico', 39.90, 39.90, 39.90, 1, 1, 0, 0, 0.00, 1, 5),
-  ('.net.br', 'Domínio .net.br', 'Domínio de rede brasileiro', 39.90, 39.90, 39.90, 1, 1, 0, 0, 0.00, 1, 6),
-  ('.org.br', 'Domínio .org.br', 'Domínio para organizações brasileiras', 39.90, 39.90, 39.90, 1, 1, 0, 0, 0.00, 1, 7),
-  ('.info', 'Domínio .info', 'Domínio informacional', 59.90, 59.90, 59.90, 1, 10, 1, 1, 19.90, 1, 8),
-  ('.biz', 'Domínio .biz', 'Domínio para negócios', 59.90, 59.90, 59.90, 1, 10, 1, 1, 19.90, 1, 9);
+  ('.com', 'Domínio .com', 'Domínio comercial internacional', 39.90, 39.90, 39.90, 1, 10, 1, 1, 19.90, 1, 1, 1),
+  ('.com.br', 'Domínio .com.br', 'Domínio comercial brasileiro', 39.90, 39.90, 39.90, 1, 1, 0, 0, 0.00, 1, 1, 2),
+  ('.net', 'Domínio .net', 'Domínio de rede', 49.90, 49.90, 49.90, 1, 10, 1, 1, 19.90, 1, 1, 3),
+  ('.org', 'Domínio .org', 'Domínio para organizações', 49.90, 49.90, 49.90, 1, 10, 1, 1, 19.90, 1, 1, 4),
+  ('.br', 'Domínio .br', 'Domínio brasileiro genérico', 39.90, 39.90, 39.90, 1, 1, 0, 0, 0.00, 1, 0, 5),
+  ('.net.br', 'Domínio .net.br', 'Domínio de rede brasileiro', 39.90, 39.90, 39.90, 1, 1, 0, 0, 0.00, 1, 0, 6),
+  ('.org.br', 'Domínio .org.br', 'Domínio para organizações brasileiras', 39.90, 39.90, 39.90, 1, 1, 0, 0, 0.00, 1, 0, 7),
+  ('.info', 'Domínio .info', 'Domínio informacional', 59.90, 59.90, 59.90, 1, 10, 1, 1, 19.90, 1, 1, 8),
+  ('.biz', 'Domínio .biz', 'Domínio para negócios', 59.90, 59.90, 59.90, 1, 10, 1, 1, 19.90, 1, 0, 9);
 

@@ -29,6 +29,7 @@ $item = [
     'privacy_protection_available' => 0,
     'privacy_protection_price' => '0.00',
     'is_enabled' => 1,
+    'is_featured' => 0,
     'sort_order' => 0,
 ];
 
@@ -68,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $privacyProtectionAvailable = isset($_POST['privacy_protection_available']) ? 1 : 0;
     $privacyProtectionPrice = (float)($_POST['privacy_protection_price'] ?? 0);
     $isEnabled = isset($_POST['is_enabled']) ? 1 : 0;
+    $isFeatured = isset($_POST['is_featured']) ? 1 : 0;
     $sortOrder = (int)($_POST['sort_order'] ?? 0);
     
     if ($tld === '') $error = 'O TLD é obrigatório.';
@@ -106,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'privacy_protection_available' => $privacyProtectionAvailable,
         'privacy_protection_price' => $privacyProtectionPrice,
         'is_enabled' => $isEnabled,
+        'is_featured' => $isFeatured,
         'sort_order' => $sortOrder,
     ];
 
@@ -117,12 +120,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             db()->exec("SET character_set_connection=utf8mb4");
             
             if ($id > 0) {
-                $stmt = db()->prepare("UPDATE tlds SET tld=:tld, name=:name, description=:description, price_register=:price_register, price_renew=:price_renew, price_transfer=:price_transfer, min_years=:min_years, max_years=:max_years, epp_code_required=:epp_code_required, privacy_protection_available=:privacy_protection_available, privacy_protection_price=:privacy_protection_price, is_enabled=:is_enabled, sort_order=:sort_order WHERE id=:id");
+                $stmt = db()->prepare("UPDATE tlds SET tld=:tld, name=:name, description=:description, price_register=:price_register, price_renew=:price_renew, price_transfer=:price_transfer, min_years=:min_years, max_years=:max_years, epp_code_required=:epp_code_required, privacy_protection_available=:privacy_protection_available, privacy_protection_price=:privacy_protection_price, is_enabled=:is_enabled, is_featured=:is_featured, sort_order=:sort_order WHERE id=:id");
                 $data['id'] = $id;
                 $stmt->execute($data);
                 $_SESSION['success'] = 'TLD atualizado com sucesso.';
             } else {
-                $stmt = db()->prepare("INSERT INTO tlds (tld, name, description, price_register, price_renew, price_transfer, min_years, max_years, epp_code_required, privacy_protection_available, privacy_protection_price, is_enabled, sort_order) VALUES (:tld, :name, :description, :price_register, :price_renew, :price_transfer, :min_years, :max_years, :epp_code_required, :privacy_protection_available, :privacy_protection_price, :is_enabled, :sort_order)");
+                $stmt = db()->prepare("INSERT INTO tlds (tld, name, description, price_register, price_renew, price_transfer, min_years, max_years, epp_code_required, privacy_protection_available, privacy_protection_price, is_enabled, is_featured, sort_order) VALUES (:tld, :name, :description, :price_register, :price_renew, :price_transfer, :min_years, :max_years, :epp_code_required, :privacy_protection_available, :privacy_protection_price, :is_enabled, :is_featured, :sort_order)");
                 $stmt->execute($data);
                 $_SESSION['success'] = 'TLD criado com sucesso.';
             }
@@ -265,6 +268,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     TLD Ativo
                                 </label>
                             </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="is_featured" class="form-label">Destaque</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" value="1" <?= (int)($item['is_featured'] ?? 0) === 1 ? 'checked' : '' ?>>
+                                <label class="form-check-label" for="is_featured">
+                                    Exibir em destaque no site
+                                </label>
+                            </div>
+                            <small class="text-muted">TLDs em destaque aparecem nas páginas de registro e transferência de domínio</small>
                         </div>
 
                         <div class="mb-3">
