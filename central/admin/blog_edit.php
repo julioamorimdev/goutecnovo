@@ -27,6 +27,18 @@ function ensure_blog_upload_dir(): string {
     return $dir;
 }
 
+// Função auxiliar para formatar bytes
+if (!function_exists('formatBytes')) {
+    function formatBytes(int $bytes, int $precision = 2): string {
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+        $bytes /= (1 << (10 * $pow));
+        return round($bytes, $precision) . ' ' . $units[$pow];
+    }
+}
+
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $page_title = $id ? 'Editar artigo' : 'Novo artigo';
 $active = 'blog';
@@ -74,27 +86,71 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $isFeatured = isset($_POST['is_featured']) ? 1 : 0;
     
     // Processar upload da imagem
-    if (!empty($_FILES['image_file']['name']) && $_FILES['image_file']['error'] === UPLOAD_ERR_OK) {
+    if (!empty($_FILES['image_file']['name'])) {
         $f = $_FILES['image_file'];
-        $orig = (string)($f['name'] ?? 'blog');
-        $tmp = (string)$f['tmp_name'];
-        $ext = strtolower(pathinfo($orig, PATHINFO_EXTENSION));
-        if (!in_array($ext, ['png','jpg','jpeg','webp','svg'], true)) {
-            $error = 'Formato inválido para imagem. Use png, jpg, webp ou svg.';
+        $uploadError = $f['error'] ?? UPLOAD_ERR_NO_FILE;
+        
+        // Verificar erros de upload
+        if ($uploadError !== UPLOAD_ERR_OK) {
+            $errorMessages = [
+                UPLOAD_ERR_INI_SIZE => 'A imagem excede o tamanho máximo permitido pelo servidor PHP (upload_max_filesize: ' . ini_get('upload_max_filesize') . '). Tamanho do arquivo: ' . formatBytes($f['size'] ?? 0),
+                UPLOAD_ERR_FORM_SIZE => 'A imagem excede o tamanho máximo permitido pelo formulário (MAX_FILE_SIZE). Tamanho do arquivo: ' . formatBytes($f['size'] ?? 0),
+                UPLOAD_ERR_PARTIAL => 'O upload da imagem foi interrompido. O arquivo pode ser muito grande ou a conexão foi perdida. Tamanho do arquivo: ' . formatBytes($f['size'] ?? 0) . '. Tente novamente com uma imagem menor ou comprima a imagem antes de fazer upload.',
+                UPLOAD_ERR_NO_FILE => 'Nenhuma imagem foi enviada.',
+                UPLOAD_ERR_NO_TMP_DIR => 'Falta um diretório temporário no servidor. Contate o administrador.',
+                UPLOAD_ERR_CANT_WRITE => 'Falha ao escrever a imagem no disco. Pode ser falta de espaço em disco ou permissões incorretas. Contate o administrador.',
+                UPLOAD_ERR_EXTENSION => 'Uma extensão PHP interrompeu o upload da imagem. Contate o administrador.',
+            ];
+            $error = $errorMessages[$uploadError] ?? 'Erro desconhecido no upload da imagem (código: ' . $uploadError . '). Tamanho do arquivo: ' . formatBytes($f['size'] ?? 0);
         } else {
-            $dir = ensure_blog_upload_dir();
-            $stamp = date('Ymd_His');
-            // Remover extensão do nome original antes de sanitizar para evitar duplicação
-            $baseName = pathinfo($orig, PATHINFO_FILENAME);
-            $safe = preg_replace('/[^a-zA-Z0-9._-]+/', '_', $baseName);
-            $filename = "blog_{$stamp}_{$safe}.{$ext}";
-            $dest = $dir . '/' . $filename;
+            $orig = (string)($f['name'] ?? 'blog');
+            $tmp = (string)$f['tmp_name'];
+            $size = (int)($f['size'] ?? 0);
+            $ext = strtolower(pathinfo($orig, PATHINFO_EXTENSION));
             
-            if (!move_uploaded_file($tmp, $dest)) {
-                $error = 'Não foi possível salvar a imagem.';
+            // Verificar se o arquivo temporário existe
+            if (!is_uploaded_file($tmp)) {
+                $error = 'Arquivo inválido ou não foi enviado corretamente. Tamanho do arquivo: ' . formatBytes($size);
+            } elseif (!in_array($ext, ['png','jpg','jpeg','webp','svg'], true)) {
+                $error = 'Formato inválido para imagem. Use png, jpg, jpeg, webp ou svg. Arquivo enviado: ' . $ext;
+            } elseif ($size === 0) {
+                $error = 'O arquivo está vazio ou não foi enviado corretamente.';
+            } elseif ($size > 50 * 1024 * 1024) { // 50MB
+                $error = 'A imagem é muito grande. Tamanho do arquivo: ' . formatBytes($size) . '. Tamanho máximo permitido: 50MB. Por favor, comprima a imagem ou use uma versão menor.';
             } else {
-                // Caminho relativo à raiz do site
-                $image = '/assets/img/blog/' . $filename;
+                $dir = ensure_blog_upload_dir();
+                
+                // Verificar se o diretório é gravável
+                if (!is_writable($dir)) {
+                    $error = 'O diretório de upload não tem permissão de escrita. Contate o administrador.';
+                } elseif (!is_dir($dir)) {
+                    $error = 'O diretório de upload não existe. Contate o administrador.';
+                } else {
+                    $stamp = date('Ymd_His');
+                    // Remover extensão do nome original antes de sanitizar para evitar duplicação
+                    $baseName = pathinfo($orig, PATHINFO_FILENAME);
+                    $safe = preg_replace('/[^a-zA-Z0-9._-]+/', '_', $baseName);
+                    $filename = "blog_{$stamp}_{$safe}.{$ext}";
+                    $dest = $dir . '/' . $filename;
+                    
+                    // Verificar espaço em disco antes de tentar salvar
+                    $freeSpace = disk_free_space($dir);
+                    if ($freeSpace !== false && $freeSpace < $size * 2) {
+                        $error = 'Espaço insuficiente em disco para salvar a imagem. Espaço disponível: ' . formatBytes($freeSpace) . '. Tamanho necessário: ' . formatBytes($size);
+                    } elseif (!move_uploaded_file($tmp, $dest)) {
+                        $error = 'Não foi possível salvar a imagem. Verifique as permissões do diretório ou espaço em disco. Tamanho do arquivo: ' . formatBytes($size);
+                    } else {
+                        // Verificar se o arquivo foi realmente salvo
+                        if (!file_exists($dest)) {
+                            $error = 'A imagem foi processada mas não foi encontrada no destino.';
+                        } elseif (filesize($dest) !== $size) {
+                            $error = 'A imagem foi salva mas o tamanho não corresponde ao arquivo original. Arquivo pode estar corrompido.';
+                        } else {
+                            // Caminho relativo à raiz do site
+                            $image = '/assets/img/blog/' . $filename;
+                        }
+                    }
+                }
             }
         }
     }
@@ -153,7 +209,25 @@ require_once __DIR__ . '/partials/layout_start.php';
 ?>
 
 <?php if ($error): ?>
-    <div class="alert alert-danger"><?= h($error) ?></div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="las la-exclamation-triangle me-2"></i>
+        <strong>Erro:</strong> <?= h($error) ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>
+<?php endif; ?>
+
+<?php 
+// Verificar limites de upload do PHP
+$uploadMax = ini_get('upload_max_filesize');
+$postMax = ini_get('post_max_size');
+if ($uploadMax && (int)$uploadMax < 10): 
+?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <i class="las la-info-circle me-2"></i>
+        <strong>Atenção:</strong> O limite de upload do servidor está configurado para <?= h($uploadMax) ?>. 
+        Se sua imagem for maior que isso, o upload falhará. Contate o administrador para aumentar o limite.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+    </div>
 <?php endif; ?>
 
 <?php if (isset($_GET['success']) && $_GET['success'] === '1'): ?>
@@ -188,10 +262,12 @@ require_once __DIR__ . '/partials/layout_start.php';
             <div class="row g-3">
                 <div class="col-12">
                     <label class="form-label">Imagem do artigo</label>
-                    <input class="form-control" type="file" name="image_file" accept=".png,.jpg,.jpeg,.webp,.svg">
+                    <input class="form-control" type="file" name="image_file" id="image_file_input" accept=".png,.jpg,.jpeg,.webp,.svg">
                     <div class="small text-body-secondary mt-1">
-                        Faça upload de uma nova imagem ou mantenha a atual abaixo
+                        Faça upload de uma nova imagem ou mantenha a atual abaixo. Tamanho máximo: 50MB. Formatos aceitos: PNG, JPG, JPEG, WEBP, SVG.
                     </div>
+                    <div id="file_size_info" class="small mt-2" style="display: none;"></div>
+                    <div id="file_size_error" class="alert alert-danger mt-2" style="display: none;"></div>
                     <?php if (!empty($blog_item['image'])): ?>
                         <div class="mt-2 p-2 border rounded">
                             <div class="small text-body-secondary mb-1">Imagem atual:</div>
@@ -310,12 +386,77 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Validar tamanho do arquivo antes de submeter
+    var imageInput = document.getElementById('image_file_input');
+    var fileSizeInfo = document.getElementById('file_size_info');
+    var fileSizeError = document.getElementById('file_size_error');
+    var maxSize = 50 * 1024 * 1024; // 50MB em bytes
+    
+    function formatBytes(bytes) {
+        if (bytes === 0) return '0 B';
+        var k = 1024;
+        var sizes = ['B', 'KB', 'MB', 'GB'];
+        var i = Math.floor(Math.log(bytes) / Math.log(k));
+        return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+    }
+    
+    if (imageInput) {
+        imageInput.addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            if (file) {
+                var fileSize = file.size;
+                fileSizeError.style.display = 'none';
+                
+                if (fileSize > maxSize) {
+                    fileSizeError.innerHTML = '<i class="las la-exclamation-triangle me-1"></i> <strong>Arquivo muito grande!</strong> Tamanho: ' + formatBytes(fileSize) + '. Tamanho máximo: 50MB. Por favor, comprima a imagem ou escolha uma versão menor.';
+                    fileSizeError.style.display = 'block';
+                    imageInput.value = ''; // Limpar seleção
+                    fileSizeInfo.style.display = 'none';
+                } else {
+                    fileSizeInfo.innerHTML = '<i class="las la-info-circle me-1"></i> Tamanho do arquivo: ' + formatBytes(fileSize) + ' (máximo: 50MB)';
+                    fileSizeInfo.style.display = 'block';
+                    fileSizeInfo.className = 'small mt-2 text-success';
+                }
+            } else {
+                fileSizeInfo.style.display = 'none';
+                fileSizeError.style.display = 'none';
+            }
+        });
+    }
+    
     // Atualizar textarea antes de submeter
     var form = document.querySelector('form');
     if (form) {
         form.addEventListener('submit', function(e) {
+            // Verificar tamanho do arquivo novamente antes de submeter
+            if (imageInput && imageInput.files.length > 0) {
+                var file = imageInput.files[0];
+                if (file.size > maxSize) {
+                    e.preventDefault();
+                    fileSizeError.innerHTML = '<i class="las la-exclamation-triangle me-1"></i> <strong>Erro:</strong> O arquivo é muito grande (' + formatBytes(file.size) + '). Tamanho máximo: 50MB.';
+                    fileSizeError.style.display = 'block';
+                    imageInput.focus();
+                    return false;
+                }
+            }
+            
+            // Atualizar conteúdo do editor
             if (contentTextarea) {
                 contentTextarea.value = quill.root.innerHTML;
+            }
+            
+            // Mostrar loading no botão
+            var submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                var originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="las la-spinner la-spin me-1"></i> Salvando...';
+                
+                // Reabilitar após 60 segundos (timeout de segurança)
+                setTimeout(function() {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }, 60000);
             }
         });
     }

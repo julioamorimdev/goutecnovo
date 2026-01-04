@@ -67,6 +67,25 @@ if (!function_exists('formatDate')) {
         return "{$day} de {$months[$month]} de {$year}";
     }
 }
+
+// Função para corrigir URLs do blog para usar o subdomínio correto
+if (!function_exists('fixBlogUrl')) {
+    function fixBlogUrl(string $url): string {
+        // Se a URL começa com /central/, sempre converter para usar o subdomínio
+        // Isso garante que os links funcionem tanto no site principal quanto no subdomínio
+        if (strpos($url, '/central/') === 0) {
+            // Remover /central/ e adicionar o subdomínio
+            $path = str_replace('/central/', '/', $url);
+            return 'https://central.goutec.com.br' . $path;
+        }
+        // Se já for uma URL completa, retornar como está
+        if (strpos($url, 'http://') === 0 || strpos($url, 'https://') === 0) {
+            return $url;
+        }
+        // Para URLs relativas que não começam com /central/, retornar como está
+        return $url;
+    }
+}
 ?>
 
 <!-- Blog -->
@@ -83,7 +102,7 @@ if (!function_exists('formatDate')) {
                 </div>
                 <div class="col-lg-5">
                     <div class="text-xl-end" data-sal="slide-up" data-sal-duration="500" data-sal-delay="300" data-sal-easing="ease-in-out-sine">
-                        <a href="blog-listing.html" class="btn btn-primary btn-arrow btn-lg fs-14 fw-medium rounded">
+                        <a href="https://central.goutec.com.br/blog.php" class="btn btn-primary btn-arrow btn-lg fs-14 fw-medium rounded">
                             <span class="btn-arrow__text">
                                 Ver mais artigos
                                 <span class="btn-arrow__icon">
@@ -115,11 +134,11 @@ if (!function_exists('formatDate')) {
                                     </div>
                                 </div>
                                 <h5 class="mb-6">
-                                    <a href="<?= h($featuredPost['url']) ?>" class="text-decoration-none text-white hover:text-primary transition">
+                                    <a href="<?= h(fixBlogUrl($featuredPost['url'])) ?>" class="text-decoration-none text-white hover:text-primary transition">
                                         <?= h($featuredPost['title']) ?>
                                     </a>
                                 </h5>
-                                <a href="<?= h($featuredPost['url']) ?>" class="text-decoration-none d-inline-flex align-items-center gap-2 text-primary fw-semibold btn-arrow">
+                                <a href="<?= h(fixBlogUrl($featuredPost['url'])) ?>" class="text-decoration-none d-inline-flex align-items-center gap-2 text-primary fw-semibold btn-arrow">
                                     <span class="d-inline-block btn-arrow__text">
                                         Ler mais
                                         <span class="btn-arrow__icon">
@@ -142,12 +161,12 @@ if (!function_exists('formatDate')) {
                                 <div class="col-12" data-sal="slide-up" data-sal-duration="500" data-sal-delay="<?= $delay ?>" data-sal-easing="ease-in-out-sine">
                                     <div class="side-blog-item px-6 py-7 d-flex align-items-center justify-content-between gap-5 rounded-3 transition">
                                         <div>
-                                            <a href="blog-listing.html" class="d-flex align-items-center gap-2 text-decoration-none mb-1">
+                                            <div class="d-flex align-items-center gap-2 text-decoration-none mb-1">
                                                 <span class="text-white text-opacity-75 fs-20"><i class="las la-edit"></i></span>
                                                 <span class="d-inline-block text-white text-opacity-75 fs-14 fw-medium mb-0"><?= h($post['author']) ?></span>
-                                            </a>
+                                            </div>
                                             <h6 class="text-white mb-4">
-                                                <a href="<?= h($post['url']) ?>" class="d-inline-block text-decoration-none text-white hover:text-primary transition max-text-28">
+                                                <a href="<?= h(fixBlogUrl($post['url'])) ?>" class="d-inline-block text-decoration-none text-white hover:text-primary transition max-text-28">
                                                     <?= h($post['title']) ?>
                                                 </a>
                                             </h6>
@@ -156,7 +175,7 @@ if (!function_exists('formatDate')) {
                                                 <p class="text-white text-opacity-75 fs-14 fw-medium mb-0"><?= formatDate($post['published_date']) ?></p>
                                             </div>
                                         </div>
-                                        <a href="<?= h($post['url']) ?>" class="arrow-btn d-grid place-content-center w-8 h-8 rounded-circle border border-secondary flex-shrink-0 transition opacity-25">
+                                        <a href="<?= h(fixBlogUrl($post['url'])) ?>" class="arrow-btn d-grid place-content-center w-8 h-8 rounded-circle border border-secondary flex-shrink-0 transition opacity-25">
                                             <span class="text-secondary fs-16 d-inline-block"><i class="las la-arrow-right"></i></span>
                                         </a>
                                     </div>

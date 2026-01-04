@@ -9,5 +9,6 @@ RUN a2enmod rewrite headers \
   && rm -rf /var/lib/apt/lists/*
 
 COPY docker/php/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/php/php.ini /usr/local/etc/php/conf.d/uploads.ini
 
 
